@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,memo ,useRef } from 'react';
 import {
     ScrollView,
     StyleSheet,
@@ -15,17 +15,22 @@ import BtnComponent from '../../Components/BtnComp/BtnComp'
 import styles from './Styles'
 import { DrawerActions } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
-import { submitValue, deleteValue, makeReport } from '../../redux/actions/listingAction'
+import { submitValue, deleteValue, makeReport, setItemCounter } from '../../redux/actions/listingAction'
 import Report from '../Reports/Reports';
 
 
+
+
 const MainScreen = ({ navigation }) => {
+
+
+    console.log("shwoing values of data get",dataPushed)
     const listing = useSelector(state => state.listing)
+    const initialArray = useSelector(state => state.listing.productList)
+    let itemCounter = useSelector(state => state.listing.itemCounter)
     const report = useSelector(state => state.listing.dataBase)
 
-    // console.log("Showing Submitted Values", submit)
-
-
+    const [tempArray, setTempArray] = useState(null); 
     const dispatch = useDispatch()
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
 
@@ -39,18 +44,59 @@ const MainScreen = ({ navigation }) => {
     const [finalResult, setFinalResult] = useState(null);
 
 
+    let temp = new Array();
 
-    const resetFunction = () => {
-        console.log("shwoing values of after pushed array ", dataPushed)
-        // dataPushed.Qty = null;
-        // setDataPushed(dataPushed.splice(0, dataPushed.length));
-        // setDataPushed(dataPushed.length = 0);
+    const reportFunction = () => {
+
+            // dataPushed.map((item, index) => {
+            //     item.dateCreated = new Date().toISOString().substring(0, 10);
+            //     report.push(item)
+            // })
+    
+            // dispatch(makeReport(
+            //     report
+            // ))
+        
+        console.log("Showing the dates for starting and ending......", initialArray);
+        console.log("Showing the dates for starting and ending >>>>>>>>>>>", dataPushed);
+        let oldReport = new Array(); 
+        oldReport.push(...temp);
+        console.log('old reports...', oldReport);
+        initialArray.map((item, index) => {
+            let tempItem = {...item};
+            if (tempItem.id != dataPushed.id) {
+                tempItem.dateCreated = new Date().toISOString().substring(0, 10);
+                tempItem.id = tempItem.id + '_' + new Date().toISOString();
+                temp.push(tempItem);
+            }
+            else {
+                dataPushed.dateCreated = new Date().toISOString().substring(0, 10);
+                dataPushed.id = dataPushed.id + '_' + new Date().toISOString();
+                temp.push(dataPushed);
+            }
+        })
+        console.log('new reports...', temp);
+        setTempArray(Array.prototype.push.apply(temp,oldReport));
+
+        console.log("Matched items.........<<<<<<<<", temp);
+    }
+
+    const resetFunction =  () => {
         setDataPushed(null);
-        deleteValue();
-        // console.log("shwoing values of after pushed array ", dataPushed)
         setCounter(null)
         setTotalSale(null)
+
+        initialArray.map((element, index) => {
+            element.Qty = 0;
+            element.cost = element.retail;
+            element.grandTotal = 0;
+            })
+
+            dispatch(setItemCounter(
+                itemCounter = 0
+            ))
     }
+
 
     const removeCartItem = (item) => {
         if (item.Qty === 1) {
@@ -63,28 +109,29 @@ const MainScreen = ({ navigation }) => {
             setTotalSale(totalSale - item.retail)
         } else {
             let objIndex = dataPushed.findIndex((obj => obj.id == item.id));
-
             //Log object to Console.
             console.log("Before update: ", dataPushed[objIndex])
-
             //Update object's name property.
             dataPushed[objIndex].Qty = dataPushed[objIndex].Qty - 1
             dataPushed[objIndex].grandTotal = dataPushed[objIndex].grandTotal - dataPushed[objIndex].retail
             setTotalSale(dataPushed[objIndex].grand = totalSale - dataPushed[objIndex].retail)
             setCounter(counter - 1)
-            // console.log("Showing id of deleting item ", item.C_Num);
-            // // alert(item.C_Num);
-            // var lists = dataPushed.filter(x => {
-            //     return x.id != item.id;
-            // })
-            // setDataPushed(lists)
-            // setCounter(counter - 1)
-            // setTotalSale(totalSale - item.retail)
         }
-    }
-    const calculation = async () => {
 
-        await setFinalResult(amount - totalSale);
+        dispatch(setItemCounter(
+            itemCounter -= 1
+        ))
+        console.log('counter .... ', itemCounter);
+
+        // console.log('datapushed....',datapushed);
+        if(itemCounter == 0)
+        {
+            resetFunction();
+        }
+        console.log('initial array single remove',initialArray);
+    }
+    const calculation = () => {
+        setFinalResult(amount - totalSale);
         Alert.alert(
             // `Change Due : $${finalResult}`,
             `Change Due : $${amount - totalSale}`,
@@ -100,35 +147,34 @@ const MainScreen = ({ navigation }) => {
         );
     }
     const checkoutFunction = () => {
-        dataPushed.map((item, index) => {
-            item.dateCreated = new Date().toISOString().substring(0, 10);
-            report.push(item)
-        })
-
-        dispatch(makeReport(
-            report
-        ))
+        reportFunction();
         console.log("Showing submitted values for showing next in reports.....", report)
         setSecmodalVisible(false)
         setAmount(null);
         setFinalResult(null);
-        setTotalSale(null);
-        setCounter(null);
-        setDataPushed(null)
+        // setTotalSale(null);
+        // setCounter(null);
+        // setDataPushed(null);
+        resetFunction();
 
     }
     const SubmitValuesRedux = (item) => {
+        console.log("Item add........ ", item)
         if (dataPushed == null) {
+            item.Qty = item.Qty +1
+            item.grandTotal = item.grandTotal + item.retail
             setDataPushed([item])
             setCounter(1)
             setTotalSale(item.retail)
-
         }
         else {
             if (dataPushed.indexOf(item) === -1) {
+                item.Qty = item.Qty +1 
+                item.grandTotal = item.grandTotal + item.retail
                 setDataPushed([...dataPushed, item])
                 setCounter(counter + 1)
                 setTotalSale(totalSale + item.retail)
+              
             }
             else {
                 let objIndex = dataPushed.findIndex((obj => obj.id == item.id));
@@ -151,7 +197,11 @@ const MainScreen = ({ navigation }) => {
 
             }
         }
-        console.log("showing final results are ", dataPushed)
+        console.log("showing final results are ", dataPushed);
+        dispatch(setItemCounter(
+            itemCounter += 1
+        ))
+        console.log('counter .... ', itemCounter);
     }
 
     return (
@@ -239,31 +289,28 @@ const MainScreen = ({ navigation }) => {
 
                         <View style={{ height: hp(15), backgroundColor: '#fff', }}>
 
-                            <FlatList
-                                data={dataPushed}
-                                extraData={dataPushed}
-                                // numColumns={3}
-                                keyExtractor={item => item.id}
-                                renderItem={({ item, index }) =>
+                          <FlatList
+                          data={dataPushed}
+                          extraData={dataPushed}
+                          keyExtractor={item => item.id}
+                          renderItem={({item, index}) => 
                                     <View style={styles.modalFLatList}>
 
-                                        <Text style={styles.codeDesign}>Code # {item.C_Num}</Text>
-                                        <Text style={styles.codeDesign}>{item.Qty}</Text>
+                            <Text style={styles.codeDesign}>Code # {item.C_Num}</Text>
+                            <Text style={styles.codeDesign}>{item.Qty}</Text>
 
-                                        <View style={{ flexDirection: 'row', }}>
-                                            <Text style={styles.codeDesign}>${item.grandTotal ? parseFloat(item.grandTotal).toFixed(2) : 0}</Text>
-                                            <View style={styles.crossStyle}>
-                                                <CrossSingle
-                                                    onPress={() => removeCartItem(item)}
-                                                    name="cross" size={30} color="red" />
-                                            </View>
+                            <View style={{ flexDirection: 'row', }}>
+                                <Text style={styles.codeDesign}>${item.grandTotal ? parseFloat(item.grandTotal).toFixed(2) : 0}</Text>
+                                <View style={styles.crossStyle}>
+                                    <CrossSingle
+                                        onPress={() => removeCartItem(item)}
+                                        name="cross" size={30} color="red" />
+                                </View>
 
-                                        </View>
+                            </View>
 
-                                    </View>
-
-                                }
-                            />
+                            </View>
+                            } />
                         </View>
 
                         <View style={styles.lastView}>
@@ -346,7 +393,7 @@ const MainScreen = ({ navigation }) => {
                             width={wp(70)}
                             height={hp(6)}
                             marginTop={wp(6)}
-                            onPress={calculation}
+                            onPress={()=>calculation()}
 
                         />
 
@@ -372,4 +419,5 @@ const MainScreen = ({ navigation }) => {
     )
 
 }
-export default MainScreen;
+export default MainScreen
+

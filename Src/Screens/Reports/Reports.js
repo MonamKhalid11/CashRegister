@@ -26,6 +26,7 @@ const Report = ({ navigation }) => {
     const [startDate, setStartDate] = useState(new Date().toISOString().substring(0, 10))
     const [endDate, setEndDate] = useState(new Date().toISOString().substring(0, 10))
     const [tableHead, setTableHead] = useState(['Item Name', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price'])
+    const [genReport, setGenReport] = useState(null);
 
     let array = new Array();
 
@@ -37,12 +38,23 @@ const Report = ({ navigation }) => {
 
     const fetchReport = () => {
         console.log("Showing the dates for starting and ending......", report);
+        setGenReport(...report);
         report.map((item, index) => {
             if (item.dateCreated >= startDate && item.dateCreated <= endDate) {
+                if(item.id != genReport.id){
+                    genReport.push(item)
+
+                } else {
+                    genReport.Qty += item.Qty
+                    genReport.totalCost = genReport.Qty * genReport.cost
+                    genReport.totalRetail = genReport.Qty * genReport.retail
+                }
+                
                 array.push(item);
                 setFinalReport(array)
             }
             else {
+
                 console.log("N o t matched  items.........<<<<<<<<", item)
             }
         })

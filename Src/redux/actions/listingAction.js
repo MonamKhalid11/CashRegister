@@ -16,3 +16,11 @@ export const makeReport = (reportParams) => ({
     type: ActionTypes.REPORT,
     report: reportParams
 })
+export const setDataPushed = (reportParams) => ({
+    type: ActionTypes.DATA_PUSHED,
+    dataPushed: reportParams
+})
+export const setItemCounter = (counterParams) => ({
+    type: ActionTypes.ITEM_COUNTER,
+    itemCounter: counterParams
+})

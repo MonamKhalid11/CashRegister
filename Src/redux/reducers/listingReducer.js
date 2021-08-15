@@ -4,134 +4,136 @@ const listingReducer = (state = {
         {
             id: 0,
             C_Num: 1,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 1,
             C_Num: 2,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 2,
             C_Num: 3,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 3,
             C_Num: 4,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 4,
             C_Num: 5,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 5,
             C_Num: 6,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 6,
             C_Num: 7,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 7,
             C_Num: 8,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 8,
             C_Num: 9,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 9,
             C_Num: 10,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 10,
             C_Num: 11,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 11,
             C_Num: 12,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         }
 
     ],
     cart: null,
-    dataBase: []
+    dataBase: [],
+    dataPushed:[],
+    itemCounter: 0,
 
 }, action) => {
     switch (action.type) {
@@ -152,6 +154,14 @@ const listingReducer = (state = {
             return Object.assign({}, state, {
                 dataBase: action.report
             });
+        case Actions.DATA_PUSHED:
+            return Object.assign({}, state, {
+                dataPushed: action.dataPushed
+            });
+        case Actions.ITEM_COUNTER:
+        return Object.assign({}, state, {
+            itemCounter: action.itemCounter
+        });
         default:
             return state;
     }
