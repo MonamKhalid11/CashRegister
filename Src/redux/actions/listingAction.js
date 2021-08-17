@@ -16,9 +16,9 @@ export const makeReport = (reportParams) => ({
     type: ActionTypes.REPORT,
     report: reportParams
 })
-export const setDataPushed = (reportParams) => ({
-    type: ActionTypes.DATA_PUSHED,
-    dataPushed: reportParams
+export const setDataDatabaseArray = (dataParams) => ({
+    type: ActionTypes.DATA_IS_PUSHED,
+    dataIsPushed: dataParams
 })
 export const setItemCounter = (counterParams) => ({
     type: ActionTypes.ITEM_COUNTER,

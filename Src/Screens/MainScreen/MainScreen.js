@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,memo ,useRef } from 'react';
+import React, { useState, useEffect, memo, useRef } from 'react';
 import {
     ScrollView,
     StyleSheet,
@@ -15,7 +15,7 @@ import BtnComponent from '../../Components/BtnComp/BtnComp'
 import styles from './Styles'
 import { DrawerActions } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
-import { submitValue, deleteValue, makeReport, setItemCounter } from '../../redux/actions/listingAction'
+import { setItemCounter, setDataDatabaseArray } from '../../redux/actions/listingAction'
 import Report from '../Reports/Reports';
 
 
@@ -24,13 +24,18 @@ import Report from '../Reports/Reports';
 const MainScreen = ({ navigation }) => {
 
 
-    console.log("shwoing values of data get",dataPushed)
+    console.log("shwoing values of data get", dataPushed)
+    const dataBase = useSelector(state => state.listing.dataBase)
+    console.log("shwoing values of data get database here are", dataBase)
+
+
+
     const listing = useSelector(state => state.listing)
     const initialArray = useSelector(state => state.listing.productList)
     let itemCounter = useSelector(state => state.listing.itemCounter)
     const report = useSelector(state => state.listing.dataBase)
 
-    const [tempArray, setTempArray] = useState(null); 
+    const [tempArray, setTempArray] = useState(null);
     const dispatch = useDispatch()
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
 
@@ -48,40 +53,36 @@ const MainScreen = ({ navigation }) => {
 
     const reportFunction = () => {
 
-            // dataPushed.map((item, index) => {
-            //     item.dateCreated = new Date().toISOString().substring(0, 10);
-            //     report.push(item)
-            // })
-    
-            // dispatch(makeReport(
-            //     report
-            // ))
-        
         console.log("Showing the dates for starting and ending......", initialArray);
         console.log("Showing the dates for starting and ending >>>>>>>>>>>", dataPushed);
-        let oldReport = new Array(); 
-        oldReport.push(...temp);
-        console.log('old reports...', oldReport);
+        let finalArray = []
+
         initialArray.map((item, index) => {
-            let tempItem = {...item};
+            const tempItem = { ...item };
             if (tempItem.id != dataPushed.id) {
                 tempItem.dateCreated = new Date().toISOString().substring(0, 10);
                 tempItem.id = tempItem.id + '_' + new Date().toISOString();
-                temp.push(tempItem);
+                finalArray.push(tempItem)
             }
             else {
                 dataPushed.dateCreated = new Date().toISOString().substring(0, 10);
                 dataPushed.id = dataPushed.id + '_' + new Date().toISOString();
-                temp.push(dataPushed);
+                finalArray.push(dataPushed)
+
             }
+
         })
+        finalArray.createdDate = new Date().toISOString().substring(0, 10)
+        dispatch(setDataDatabaseArray(finalArray))
+
+        finalArray = []
         console.log('new reports...', temp);
-        setTempArray(Array.prototype.push.apply(temp,oldReport));
+        setTempArray(temp);
 
         console.log("Matched items.........<<<<<<<<", temp);
     }
 
-    const resetFunction =  () => {
+    const resetFunction = () => {
         setDataPushed(null);
         setCounter(null)
         setTotalSale(null)
@@ -90,11 +91,11 @@ const MainScreen = ({ navigation }) => {
             element.Qty = 0;
             element.cost = element.retail;
             element.grandTotal = 0;
-            })
+        })
 
-            dispatch(setItemCounter(
-                itemCounter = 0
-            ))
+        dispatch(setItemCounter(
+            itemCounter = 0
+        ))
     }
 
 
@@ -124,11 +125,10 @@ const MainScreen = ({ navigation }) => {
         console.log('counter .... ', itemCounter);
 
         // console.log('datapushed....',datapushed);
-        if(itemCounter == 0)
-        {
+        if (itemCounter == 0) {
             resetFunction();
         }
-        console.log('initial array single remove',initialArray);
+        console.log('initial array single remove', initialArray);
     }
     const calculation = () => {
         setFinalResult(amount - totalSale);
@@ -161,7 +161,7 @@ const MainScreen = ({ navigation }) => {
     const SubmitValuesRedux = (item) => {
         console.log("Item add........ ", item)
         if (dataPushed == null) {
-            item.Qty = item.Qty +1
+            item.Qty = item.Qty + 1
             item.grandTotal = item.grandTotal + item.retail
             setDataPushed([item])
             setCounter(1)
@@ -169,12 +169,12 @@ const MainScreen = ({ navigation }) => {
         }
         else {
             if (dataPushed.indexOf(item) === -1) {
-                item.Qty = item.Qty +1 
+                item.Qty = item.Qty + 1
                 item.grandTotal = item.grandTotal + item.retail
                 setDataPushed([...dataPushed, item])
                 setCounter(counter + 1)
                 setTotalSale(totalSale + item.retail)
-              
+
             }
             else {
                 let objIndex = dataPushed.findIndex((obj => obj.id == item.id));
@@ -289,28 +289,28 @@ const MainScreen = ({ navigation }) => {
 
                         <View style={{ height: hp(15), backgroundColor: '#fff', }}>
 
-                          <FlatList
-                          data={dataPushed}
-                          extraData={dataPushed}
-                          keyExtractor={item => item.id}
-                          renderItem={({item, index}) => 
+                            <FlatList
+                                data={dataPushed}
+                                extraData={dataPushed}
+                                keyExtractor={item => item.id}
+                                renderItem={({ item, index }) =>
                                     <View style={styles.modalFLatList}>
 
-                            <Text style={styles.codeDesign}>Code # {item.C_Num}</Text>
-                            <Text style={styles.codeDesign}>{item.Qty}</Text>
+                                        <Text style={styles.codeDesign}>Code # {item.C_Num}</Text>
+                                        <Text style={styles.codeDesign}>{item.Qty}</Text>
 
-                            <View style={{ flexDirection: 'row', }}>
-                                <Text style={styles.codeDesign}>${item.grandTotal ? parseFloat(item.grandTotal).toFixed(2) : 0}</Text>
-                                <View style={styles.crossStyle}>
-                                    <CrossSingle
-                                        onPress={() => removeCartItem(item)}
-                                        name="cross" size={30} color="red" />
-                                </View>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Text style={styles.codeDesign}>${item.grandTotal ? parseFloat(item.grandTotal).toFixed(2) : 0}</Text>
+                                            <View style={styles.crossStyle}>
+                                                <CrossSingle
+                                                    onPress={() => removeCartItem(item)}
+                                                    name="cross" size={30} color="red" />
+                                            </View>
 
-                            </View>
+                                        </View>
 
-                            </View>
-                            } />
+                                    </View>
+                                } />
                         </View>
 
                         <View style={styles.lastView}>
@@ -393,7 +393,7 @@ const MainScreen = ({ navigation }) => {
                             width={wp(70)}
                             height={hp(6)}
                             marginTop={wp(6)}
-                            onPress={()=>calculation()}
+                            onPress={() => calculation()}
 
                         />
 

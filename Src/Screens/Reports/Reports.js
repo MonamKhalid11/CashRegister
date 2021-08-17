@@ -20,16 +20,29 @@ import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
 const Report = ({ navigation }) => {
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
-    const report = useSelector(state => state.listing.dataBase)
+    const dataBase = useSelector(state => state.listing.dataBase)
+    const initialData = useSelector(state => state.listing.productList)
+
 
     const [finalReport, setFinalReport] = useState();
     const [startDate, setStartDate] = useState(new Date().toISOString().substring(0, 10))
     const [endDate, setEndDate] = useState(new Date().toISOString().substring(0, 10))
     const [tableHead, setTableHead] = useState(['Item Name', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price'])
     const [genReport, setGenReport] = useState(null);
+    const [totalItems, setTotalItems] = useState(0);
+    const [totalGrand, setTotalGrand] = useState(0);
 
-    let array = new Array();
-
+    let array = []
+    let final = [{
+        C_Num: 0,
+        Qty: 0,
+        cost: 0,
+        retail: 0,
+        totalCost: 0,
+        totalRetail: 0
+    }]
+    let newArray = []
+    let FinalReportArray = []
 
 
     useEffect(() => {
@@ -37,28 +50,71 @@ const Report = ({ navigation }) => {
     }, [navigation])
 
     const fetchReport = () => {
-        console.log("Showing the dates for starting and ending......", report);
-        setGenReport(...report);
-        report.map((item, index) => {
-            if (item.dateCreated >= startDate && item.dateCreated <= endDate) {
-                if(item.id != genReport.id){
-                    genReport.push(item)
-
-                } else {
-                    genReport.Qty += item.Qty
-                    genReport.totalCost = genReport.Qty * genReport.cost
-                    genReport.totalRetail = genReport.Qty * genReport.retail
-                }
-                
-                array.push(item);
-                setFinalReport(array)
-            }
-            else {
-
-                console.log("N o t matched  items.........<<<<<<<<", item)
+        console.log("Showing the dates for starting and ending......", dataBase);
+        dataBase.map((item, index) => {
+            if (item.createdDate >= startDate && item.createdDate <= endDate) {
+                item.map((value, index) => {
+                    if (value.id) {
+                        newArray.push(value);
+                    }
+                })
             }
         })
-        console.log("Matched items.........<<<<<<<<", finalReport);
+        console.log("Value of the item in single iteration", newArray);
+        let obj = {}
+
+        newArray.map((item, index) => {
+            if (obj[item.C_Num]) {
+                obj[item.C_Num].Qty += item.Qty
+                // obj[item.C_Num].retail = item.retail
+                // obj[item.C_Num].totalCost = final.Qty * final.cost
+            }
+            else {
+                obj[item.C_Num] = {}
+                obj[item.C_Num].C_Num = item.C_Num
+                obj[item.C_Num].cost = item.cost
+                obj[item.C_Num].retail = item.retail
+                obj[item.C_Num].Qty = item.Qty
+                obj[item.C_Num].totalCost = obj[item.C_Num].Qty * obj[item.C_Num].cost
+                obj[item.C_Num].totalRetail = obj[item.C_Num].Qty * obj[item.C_Num].retail
+
+
+            }
+            // console.log("Value of the item in single iteration", array[0].C_Num);
+            // if (array.length == 0) {
+            //     array.push(item);
+            //     console.log("Value of the item in single iteration", array[0].C_Num);
+            // }
+            // if (item.C_Num == array[0].C_Num) {
+            //     console.log("matched", item);
+            //     final.C_Num = item.C_Num
+            //     final.Qty += item.Qty
+            //     final.cost = item.cost
+            //     final.retail = item.retail
+            //     final.totalCost = final.Qty * final.cost
+            //     final.totalRetail = final.Qty * final.retail
+            //     setTotalItems(totalItems + final.Qty)
+            //     setTotalGrand(totalGrand + final.totalRetail)
+            //     console.log("Arrayyy", final);
+            //     // array.push(item);
+            //     // FinalReportArray.push(final);
+            // } else {
+            //     array.push(item);
+            //     console.log("Not Match", item);
+
+            // }
+
+        })
+        // obj[item.C_Num].totalCost = obj[item.C_Num].Qty * obj[item.C_Num].cost
+        // obj[item.C_Num].totalRetail = obj[item.C_Num].Qty * obj[item.C_Num].retail
+
+        // setTotalItems(totalItems + final.Qty)
+        // setTotalGrand(totalGrand + final.totalRetail)
+
+
+        FinalReportArray = Object.values(obj)
+        console.log("final Array to be shown in reports FinalReportArray", FinalReportArray)
+
 
     }
 
@@ -145,22 +201,20 @@ const Report = ({ navigation }) => {
 
                     <Table borderStyle={{ borderWidth: 0 }}>
                         <Row
-
                             data={tableHead}
                             flexArr={[2, 2.1, 1.8, 2, 2, 1.1]}
                         />
 
                     </Table>
                     <FlatList
-                        data={finalReport}
-                        extraData={finalReport}
-                        keyExtractor={item => item.id}
+                        data={FinalReportArray}
                         renderItem={({ item, index }) =>
                             <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3), flexDirection: 'row' }}>
+                                {console.log("shoeing items here", item)}
                                 <Text
                                     style={styles.CTextStyle}
                                 >
-                                    {item.C_Num}
+                                    asad
                                 </Text>
                                 <Text
                                     style={styles.DTextStyle}
@@ -173,7 +227,7 @@ const Report = ({ navigation }) => {
                                 <Text
                                     style={styles.CTextStyle}
                                 >
-                                    {item.Qty}
+                                    {totalItems}
                                 </Text>
                                 <Text
                                     style={styles.DTextStyle}
@@ -181,26 +235,12 @@ const Report = ({ navigation }) => {
                                     ${item.cost}
                                 </Text>
                                 <Text>
-                                    ${item.grandTotal}
+                                    ${totalGrand}
                                 </Text>
                             </View>
                         }
                     />
                 </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </View>
 
         </View>

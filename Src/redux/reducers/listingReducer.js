@@ -132,7 +132,7 @@ const listingReducer = (state = {
     ],
     cart: null,
     dataBase: [],
-    dataPushed:[],
+    dataIsPushed: [],
     itemCounter: 0,
 
 }, action) => {
@@ -154,14 +154,14 @@ const listingReducer = (state = {
             return Object.assign({}, state, {
                 dataBase: action.report
             });
-        case Actions.DATA_PUSHED:
+        case Actions.DATA_IS_PUSHED:
             return Object.assign({}, state, {
-                dataPushed: action.dataPushed
+                dataBase: [...state.dataBase, action.dataIsPushed]
             });
         case Actions.ITEM_COUNTER:
-        return Object.assign({}, state, {
-            itemCounter: action.itemCounter
-        });
+            return Object.assign({}, state, {
+                itemCounter: action.itemCounter
+            });
         default:
             return state;
     }
