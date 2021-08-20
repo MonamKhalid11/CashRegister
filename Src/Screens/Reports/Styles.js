@@ -31,5 +31,7 @@ export default StyleSheet.create({
     ,
     emailStyle: {
         height: hp(6), width: wp(18), backgroundColor: 'grey', alignItems: 'center', justifyContent: 'center', borderRadius: wp(2)
+    },
+    CTextStyle:{
     }
 })

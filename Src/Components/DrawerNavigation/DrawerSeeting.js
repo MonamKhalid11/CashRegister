@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { widthPercentageToDP as w, heightPercentageToDP as h, widthPercentageToDP } from 'react-native-responsive-screen';
 
 import Desktop from 'react-native-vector-icons/AntDesign';
@@ -19,6 +19,7 @@ import FileText from 'react-native-vector-icons/AntDesign';
 class Setting extends Component {
     render() {
         return (
+            <ScrollView contentContainerStyle = {styles.container}>
             <View style={styles.container}>
 
                 <View style={styles.LinksContiner}>
@@ -98,6 +99,8 @@ class Setting extends Component {
 
 
             </View>
+            </ScrollView>
+
         );
     }
 }

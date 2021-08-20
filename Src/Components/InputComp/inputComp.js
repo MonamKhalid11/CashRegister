@@ -9,10 +9,8 @@ const inputFun = props => {
         <View style={[styles.mainView, { marginTop: marginTop }]}>
             {/* <Image resizeMode='contain' source={props.image} style={styles.imageHeight} /> */}
             <TextInput
-                value={props.value}
                 onChangeText={props.onChangeText}
-                keyboardType={props.keyboardType}
-                secureTextEntry={props.secureTextEntry}
+                keyboardType = {'number-pad'}
                 style={styles.textInput} placeholder={props.placeholder} placeholderTextColor={props.colors}>
                 <Text style={styles.textStyle}>{props.input}</Text>
             </TextInput>
@@ -36,7 +34,7 @@ const styles = StyleSheet.create({
         height: hp(5), width: wp(7),
     },
     textInput: {
-        height: hp(7), width: wp(60), justifyContent: 'center', alignSelf: 'center', color: '#000',
+        height: hp(7), width: wp(60), justifyContent: 'center', alignSelf: 'center', color: '#000',justifyContent:'center',fontWeight: 'bold', fontSize: wp(7)
     }
 
 })

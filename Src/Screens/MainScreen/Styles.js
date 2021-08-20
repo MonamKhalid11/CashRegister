@@ -115,10 +115,10 @@ export default StyleSheet.create({
         height: hp(0.4), width: wp(85), backgroundColor: '#000', alignSelf: 'center', marginTop: wp(3)
     },
     textInputs: {
-        height: hp(6), width: wp(80), backgroundColor: '#DDD', borderRadius: wp(0.7), marginTop: wp(5), alignSelf: 'center', paddingHorizontal: wp(4)
+        height: hp(6), width: wp(80), backgroundColor: '#DDD', borderRadius: wp(0.7), marginTop: wp(5), alignSelf: 'center', paddingHorizontal: wp(4),justifyContent:'center'
     },
     texts: {
-        color: '#000', fontWeight: 'bold', fontSize: wp(7)
+        color: '#000', fontWeight: 'bold', fontSize: wp(7),
     }
 
 

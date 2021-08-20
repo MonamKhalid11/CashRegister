@@ -131,6 +131,7 @@ const MainScreen = ({ navigation }) => {
         console.log('initial array single remove', initialArray);
     }
     const calculation = () => {
+        console.log("showing vlaues here are",amount,totalSale)
         setFinalResult(amount - totalSale);
         Alert.alert(
             // `Change Due : $${finalResult}`,
@@ -380,8 +381,9 @@ const MainScreen = ({ navigation }) => {
                             style={{ fontWeight: 'bold', fontSize: wp(7) }}
                             value={amount}
                             onChangeText={setAmount}
-                        // input={"Amount Tendered"}
+                            input={amount}
                         />
+
 
                         <View style={styles.textInputs}>
                             <Text style={styles.texts}>${finalResult ? parseFloat(finalResult).toFixed(2) : 0}</Text>
@@ -393,7 +395,7 @@ const MainScreen = ({ navigation }) => {
                             width={wp(70)}
                             height={hp(6)}
                             marginTop={wp(6)}
-                            onPress={() => calculation()}
+                            onPress={calculation}
 
                         />
 

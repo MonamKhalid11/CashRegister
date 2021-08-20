@@ -24,7 +24,7 @@ const Report = ({ navigation }) => {
     const initialData = useSelector(state => state.listing.productList)
 
 
-    const [finalReport, setFinalReport] = useState();
+    const [finalReport, setFinalReport] = useState([]);
     const [startDate, setStartDate] = useState(new Date().toISOString().substring(0, 10))
     const [endDate, setEndDate] = useState(new Date().toISOString().substring(0, 10))
     const [tableHead, setTableHead] = useState(['Item Name', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price'])
@@ -66,6 +66,8 @@ const Report = ({ navigation }) => {
         newArray.map((item, index) => {
             if (obj[item.C_Num]) {
                 obj[item.C_Num].Qty += item.Qty
+                obj[item.C_Num].totalCost = obj[item.C_Num].Qty * obj[item.C_Num].cost
+                obj[item.C_Num].totalRetail = obj[item.C_Num].Qty * obj[item.C_Num].retail
                 // obj[item.C_Num].retail = item.retail
                 // obj[item.C_Num].totalCost = final.Qty * final.cost
             }
@@ -112,7 +114,7 @@ const Report = ({ navigation }) => {
         // setTotalGrand(totalGrand + final.totalRetail)
 
 
-        FinalReportArray = Object.values(obj)
+        setFinalReport(Object.values(obj))
         console.log("final Array to be shown in reports FinalReportArray", FinalReportArray)
 
 
@@ -202,40 +204,47 @@ const Report = ({ navigation }) => {
                     <Table borderStyle={{ borderWidth: 0 }}>
                         <Row
                             data={tableHead}
-                            flexArr={[2, 2.1, 1.8, 2, 2, 1.1]}
+                            flexArr={[2, 2.1, 2.2, 2.8, 2.8, 2.8]}
                         />
 
                     </Table>
                     <FlatList
-                        data={FinalReportArray}
+                        data={finalReport}
+                        extraData = {finalReport}
                         renderItem={({ item, index }) =>
                             <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3), flexDirection: 'row' }}>
                                 {console.log("shoeing items here", item)}
                                 <Text
-                                    style={styles.CTextStyle}
+                                style={{width:wp('20')}}
                                 >
-                                    asad
+                                    {item.C_Num}
                                 </Text>
                                 <Text
-                                    style={styles.DTextStyle}
+                                style={{width:wp('30')}}
                                 >
                                     ${item.cost}
                                 </Text>
-                                <Text>
+                                <Text
+                                style={{width:wp('30')}}
+
+                                >
                                     ${item.retail}
                                 </Text>
                                 <Text
-                                    style={styles.CTextStyle}
+                                style={{width:wp('30')}}
                                 >
-                                    {totalItems}
+                                    {item.Qty}
                                 </Text>
                                 <Text
-                                    style={styles.DTextStyle}
+                                    style={{width:wp('30')}}
                                 >
-                                    ${item.cost}
+                                    ${item.totalCost}
                                 </Text>
-                                <Text>
-                                    ${totalGrand}
+                                <Text
+                                style={{width:wp('30')}}
+
+                                >
+                                    ${item.totalRetail}
                                 </Text>
                             </View>
                         }
