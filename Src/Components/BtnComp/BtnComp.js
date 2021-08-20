@@ -25,9 +25,9 @@ export default BtnFunction;
 
 const styles = StyleSheet.create({
     mainView: {
-        borderRadius: wp(2), alignSelf: 'center', justifyContent: 'center', backgroundColor: '#964B00', borderRadius: wp(2)
+        borderRadius: wp(2), alignSelf: 'center', justifyContent: 'center', backgroundColor: '#800000', borderRadius: wp(2)
     },
     textStyle: {
-        fontSize: wp(5), alignSelf: 'center', justifyContent: 'center', color: '#fff', marginTop: wp(0.2)
+        fontSize: wp(5), alignSelf: 'center', justifyContent: 'center', color: '#fff', marginTop: wp(0.2), fontWeight: 'bold'
     }
 })

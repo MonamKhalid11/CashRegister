@@ -149,9 +149,9 @@ const Report = ({ navigation }) => {
                 <View style={styles.innerLastView}>
 
                     <View style={styles.dateView}>
-                        <Text style={styles.selecctedDate}>Selected Date:</Text>
+                        <Text style={styles.selecctedDate}>Select Date:</Text>
 
-                        <View style={{ height: hp(5), width: wp(20), }}>
+                        <View style={{ height: hp(5), width: wp(20), marginTop: hp(0.3)}}>
                             <DatePicker
                                 style={{ width: 100 }}
                                 date={startDate}
@@ -168,7 +168,7 @@ const Report = ({ navigation }) => {
                             />
 
                         </View>
-                        <View style={{ height: hp(5), width: wp(20) }}>
+                        <View style={{ height: hp(5), width: wp(20), marginTop: hp(0.3) }}>
                             <DatePicker
                                 style={{ width: 100 }}
                                 date={endDate}
@@ -186,7 +186,7 @@ const Report = ({ navigation }) => {
                         </View>
                         <BtnComponent
                             Text={"Submit"}
-                            width={wp(20)}
+                            width={wp(30)}
                             height={hp(6)}
                             onPress={() => fetchReport()}
 
@@ -201,8 +201,8 @@ const Report = ({ navigation }) => {
 
                 <View style={{ height: hp(30), width: wp(180), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
 
-                    <Table borderStyle={{ borderWidth: 0 }}>
-                        <Row
+                    <Table borderStyle={{ borderWidth: 0, }}>
+                        <Row  textStyle={{ fontWeight: 'bold', fontSize: 14}}
                             data={tableHead}
                             flexArr={[2, 2.1, 2.2, 2.8, 2.8, 2.8]}
                         />
@@ -238,17 +238,22 @@ const Report = ({ navigation }) => {
                                 <Text
                                     style={{width:wp('30')}}
                                 >
-                                    ${item.totalCost}
+                                    {/* ${item.totalCost} */}
+                                    ${item.totalCost ? parseFloat(item.totalCost).toFixed(2) : 0}
                                 </Text>
                                 <Text
                                 style={{width:wp('30')}}
 
                                 >
-                                    ${item.totalRetail}
+                                    {/* ${item.totalRetail} */}
+                                    ${item.totalRetail ? parseFloat(item.totalRetail).toFixed(2) : 0}
                                 </Text>
+
                             </View>
                         }
                     />
+                    
+                    
                 </View>
             </View>
 

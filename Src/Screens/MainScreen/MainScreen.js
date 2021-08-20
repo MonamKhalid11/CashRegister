@@ -300,7 +300,7 @@ const MainScreen = ({ navigation }) => {
                                         <Text style={styles.codeDesign}>Code # {item.C_Num}</Text>
                                         <Text style={styles.codeDesign}>{item.Qty}</Text>
 
-                                        <View style={{ flexDirection: 'row', }}>
+                                        <View style={{ flexDirection: 'row' }}>
                                             <Text style={styles.codeDesign}>${item.grandTotal ? parseFloat(item.grandTotal).toFixed(2) : 0}</Text>
                                             <View style={styles.crossStyle}>
                                                 <CrossSingle

@@ -7,6 +7,7 @@ import AboutUs from '../../Screens/AboutUs/AboutUs'
 import ProfileScreen from '../../Screens/ProfileScreen/ProfileScreen'
 import MainScreen from '../../Screens/MainScreen/MainScreen'
 import Reports from '../../Screens/Reports/Reports'
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 
 
@@ -15,8 +16,12 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
-            // openByDefault={false}
-            drawerContent={(props) => <Setting {...props} />}
+            screenOptions={{
+                    drawerStyle: {
+                    width: widthPercentageToDP(80),
+                    },
+                }}
+            drawerContent={(props) => <Setting {...props}/>}
         >
             <Drawer.Screen name="MainScreen" component={MainScreen} options={{ headerShown: false }} />
             <Drawer.Screen name="CodePriceChange" component={CodePriceCHange} options={{ headerShown: false }} />

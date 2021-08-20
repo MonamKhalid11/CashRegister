@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
 
     firstView: {
-        height: hp(29), width: wp(100), borderBottomWidth: wp(2.5), borderBottomColor: 'grey'
+        height: hp(23), width: wp(100), borderBottomWidth: wp(2.5), borderBottomColor: 'grey'
     },
     schoolView: {
         height: hp(8), width: wp(100), backgroundColor: '#DDD'

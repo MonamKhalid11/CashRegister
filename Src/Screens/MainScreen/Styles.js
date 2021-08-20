@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
 
     HeaderView: {
-        flex: 0.08, marginTop: wp(7),
+        flex: 0.09, marginTop: wp(7),
     },
     sectionStyle: {
         marginTop: wp(5),
@@ -55,16 +55,16 @@ export default StyleSheet.create({
         height: hp(15), width: wp(49.5), backgroundColor: 'red', justifyContent: 'center', alignItems: 'center'
     },
     totalItem: {
-        color: '#fff', fontSize: wp(5)
+        color: '#fff', fontSize: wp(5), fontWeight: 'bold'
     },
     textStyle: {
-        color: '#fff', fontSize: wp(7)
+        color: '#fff', fontSize: wp(7), fontWeight: 'bold'
     },
 
     centeredView: {
         height: hp(50),
         width: wp(95),
-        backgroundColor: '#FFB6C1',
+        backgroundColor: '#d3d3d3',
         alignSelf: 'center',
         marginTop: wp(40),
         borderRadius: wp(2)
@@ -87,13 +87,13 @@ export default StyleSheet.create({
         height: hp(0.15), width: wp(95), backgroundColor: '#000', marginTop: wp(2)
     },
     itemText1: {
-        flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(5), marginTop: wp(2)
+        flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(6), marginTop: wp(2), marginRight: wp(2)
     },
     itemText: {
         fontSize: wp(5)
     },
     codeDesign: {
-        fontSize: wp(5)
+        fontSize: wp(5), fontWeight: 'bold'
     },
     lastView: {
         flexDirection: 'row', paddingHorizontal: wp(10), marginTop: wp(3), justifyContent: 'space-between'
@@ -106,7 +106,7 @@ export default StyleSheet.create({
     }
     ,
     crossStyle: {
-        height: hp(4.5), width: wp(7.5), backgroundColor: '#fff', marginLeft: wp(2), borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center'
+        height: hp(3.9), width: wp(7.5), backgroundColor: '#fff', marginLeft: wp(1), borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center'
     },
     modalFLatList: {
         flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(2), paddingVertical: wp(2)

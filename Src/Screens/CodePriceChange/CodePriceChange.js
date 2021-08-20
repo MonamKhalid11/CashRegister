@@ -20,129 +20,129 @@ const CodePriceChange = ({ navigation }) => {
         {
             id: 0,
             C_Num: 1,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.10,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 1,
             C_Num: 2,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.2,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 2,
             C_Num: 3,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.9,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 3,
             C_Num: 4,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.75,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 4,
             C_Num: 5,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 5,
             C_Num: 6,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 6,
             C_Num: 7,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 7,
             C_Num: 8,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 8,
             C_Num: 9,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 9,
             C_Num: 10,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
 
         },
         {
             id: 10,
             C_Num: 11,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         },
         {
             id: 11,
             C_Num: 12,
-            Qty: 1,
+            Qty: 0,
             cost: 0.25,
             retail: 0.25,
             isChecked: false,
-            grandTotal: 0.25,
-            grand: 0
+            grandTotal: 0,
+            grand: 0,
         }
 
     ])
@@ -175,12 +175,14 @@ const CodePriceChange = ({ navigation }) => {
             <View style={{ flex: 0.9 }}>
                 <FlatList
                     data={isCode}
-                    // numColumns={3}
                     keyExtractor={item => item.id}
                     renderItem={({ item, index }) =>
                         <View style={styles.flatlistView}>
                             <Text style={styles.costStyler}>Code # $:</Text>
-                            <TextInput keyboardType='number-pad' style={styles.textInputStyle}>
+                            <TextInput keyboardType='number-pad' style={styles.textInputStyle}
+                             onChangeText={(value) => {
+                                    item.cost = parseFloat(value)
+                                }}>
                                 <Text style={styles.costStyler}>{item.cost}</Text>
                             </TextInput>
                             <TextInput keyboardType='number-pad' style={styles.textInputStyle}
@@ -210,7 +212,7 @@ const CodePriceChange = ({ navigation }) => {
                     Text={"Submit"}
                     width={wp(80)}
                     height={hp(7)}
-                    onPress={updateValuesRedux}
+                    onPress={()=> updateValuesRedux()}
                 />
             </View>
 

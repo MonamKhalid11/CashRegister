@@ -24,7 +24,7 @@ const HeaderComponent = (props) => {
                     <Icon name="menu" size={30} color="grey" style={{ marginTop: wp(1.5) }} />
                 </TouchableOpacity>
 
-                <Text style={{ fontSize: wp(7), fontWeight: 'bold', color: 'red' }}>
+                <Text style={{ fontSize: wp(7), fontWeight: 'bold', color: 'red', alignSelf: 'center', marginLeft: wp(2) }}>
                     {props.CashRegister}
                 </Text>
                 <TouchableOpacity

@@ -26,7 +26,7 @@ export default StyleSheet.create({
         flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(5), marginTop: wp(2)
     },
     selecctedDate: {
-        fontSize: wp(6), marginLeft: wp(4), fontWeight: 'bold'
+        fontSize: wp(6), marginLeft: wp(4), fontWeight: 'bold', alignSelf: 'center'
     }
     ,
     emailStyle: {

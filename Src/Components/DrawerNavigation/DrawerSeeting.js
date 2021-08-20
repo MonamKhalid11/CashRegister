@@ -32,10 +32,10 @@ class Setting extends Component {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{ backgroundColor: 'red', height: h(0.4), width: w(60), marginTop: w(3) }} />
+                    <View style={{ backgroundColor: 'red', height: h(0.4), width: w(70), marginTop: w(3) }} />
 
                     <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <User name="user" size={33} color="#DDD" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <User name="user" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
 
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('ProfileScreen')}
@@ -45,7 +45,7 @@ class Setting extends Component {
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <User name="tag" size={33} color="#DDD" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <User name="tag" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('CodePriceChange')}
                             style={styles.Btn} >
@@ -56,7 +56,7 @@ class Setting extends Component {
 
 
                     <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <Key name="key" size={33} color="#DDD" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <Key name="key" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('ForgetPassword')}
                             style={styles.Btn} >
@@ -67,7 +67,7 @@ class Setting extends Component {
 
 
                     <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <Report name="bar-graph" size={33} color="#DDD" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <Report name="bar-graph" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Reports')}
                             style={styles.Btn} >
@@ -77,7 +77,7 @@ class Setting extends Component {
 
 
                     <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <Inform name="infocirlce" size={33} color="#DDD" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <Inform name="infocirlce" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('AboutUs')}
                             style={styles.Btn} >
@@ -87,7 +87,7 @@ class Setting extends Component {
 
 
                     <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <FileText name="filetext1" size={33} color="#fff" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <FileText name="filetext1" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('AboutUs')}
                             style={styles.Btn} >
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     LinksContiner:
     {
         paddingLeft: h('2%'),
-        marginTop: w(15)
+        marginTop: w(11)
     },
     Btn:
     {
@@ -137,9 +137,9 @@ const styles = StyleSheet.create({
     },
     Btnlabel:
     {
-        fontSize: h('2.8%'),
+        fontSize: h('2.9%'),
         color: '#fff',
-        fontWeight: 'bold', marginRight: w(19), width: w(50)
+        fontWeight: 'bold', marginRight: w(19), width: w(80)
     }
 });
 
