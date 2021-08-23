@@ -88,12 +88,12 @@ const Report = ({ navigation }) => {
 
 
             }
-           
+
             //     setTotalItems(totalItems + final.Qty)
             //     setTotalGrand(totalGrand + final.totalRetail)
-           
+
         })
-       
+
 
         setFinalReport(Object.values(obj))
         console.log("final Array to be shown in reports FinalReportArray", FinalReportArray)
@@ -101,23 +101,22 @@ const Report = ({ navigation }) => {
 
     }
 
-   
-        const header = ['Item Name', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price'];
-        const csvReport = convertArrayToCSV(finalReport, {
-            header,
-            separator: ','
 
-        });
-        const { config, fs } = RNFetchBlob;
-        let DocumentDir = fs.dirs.DocumentDir;
-  
+    const header = ['Item Name', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price'];
+    const csvReport = convertArrayToCSV(finalReport, {
+        header,
+        separator: ','
+
+    });
+    const { config, fs } = RNFetchBlob;
+    let DocumentDir = fs.dirs.DocumentDir;
+
     // write the current list of answers to a local csv file
-        const pathToWrite = `${DocumentDir}/data.csv`;
-        console.log('pathToWrite', pathToWrite);
-        // pathToWrite /storage/emulated/0/Download/data.csv
-        const writeFile = () => 
-        {
-            RNFetchBlob.fs
+    const pathToWrite = `${DocumentDir}/data.csv`;
+    console.log('pathToWrite', pathToWrite);
+    // pathToWrite /storage/emulated/0/Download/data.csv
+    const writeFile = () => {
+        RNFetchBlob.fs
             .writeFile(pathToWrite, csvReport, 'utf8')
             .then(() => {
                 console.log(`wrote file ${pathToWrite}`);
@@ -125,30 +124,30 @@ const Report = ({ navigation }) => {
                 // wrote file /storage/emulated/0/Download/data.csv
             })
             .catch(error => console.error(error));
-        }
+    }
 
-//     const createFile = (props) => {
-//     //    const { hotNewThings } = props;
-//     // construct csvString
-//     const headerString = 'thing,timestamp\n';
-//     const rowString = hotNewThings
-//       .map(d => `${d[1]},${d[0].substring(13)}\n`)
-//       .join('');
-//     const csvString = `${headerString}${rowString}`;
+    //     const createFile = (props) => {
+    //     //    const { hotNewThings } = props;
+    //     // construct csvString
+    //     const headerString = 'thing,timestamp\n';
+    //     const rowString = hotNewThings
+    //       .map(d => `${d[1]},${d[0].substring(13)}\n`)
+    //       .join('');
+    //     const csvString = `${headerString}${rowString}`;
 
-//     // write the current list of answers to a local csv file
-//     const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/hot-new-things.csv`;
-//     console.log('pathToWrite', pathToWrite);
-//     RNFetchBlob.fs
-//       .writeFile(pathToWrite, csvString, 'utf8')
-//       .then(() => {
-//         console.log(`wrote file ${pathToWrite}`);
-//       })
-//       .catch(error => console.error(error));
-//   }
+    //     // write the current list of answers to a local csv file
+    //     const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/hot-new-things.csv`;
+    //     console.log('pathToWrite', pathToWrite);
+    //     RNFetchBlob.fs
+    //       .writeFile(pathToWrite, csvString, 'utf8')
+    //       .then(() => {
+    //         console.log(`wrote file ${pathToWrite}`);
+    //       })
+    //       .catch(error => console.error(error));
+    //   }
 
-        const handleEmail = (pathToWrite) => {
-            Mailer.mail({
+    const handleEmail = (pathToWrite) => {
+        Mailer.mail({
             subject: 'Cash Register Report',
             recipients: ['irfanoulakh@gmail.com'],
             ccRecipients: ['malikirfanahmad4@gmail.com'],
@@ -168,19 +167,19 @@ const Report = ({ navigation }) => {
                 mimeType: '', // - use only if you want to use custom type
                 name: 'data', // Optional: Custom filename for attachment
             }]
-            }, (error, event) => {
-                console.log('CANCEL: Email Error Response',error,event)
+        }, (error, event) => {
+            console.log('CANCEL: Email Error Response', error, event)
             Alert.alert(
                 error,
                 event,
                 [
-                {text: 'Ok', onPress: () => console.log('OK: Email Error Response')},
-                {text: 'Cancel', onPress: () => console.log('CANCEL: Email Error Response',error)}
+                    { text: 'Ok', onPress: () => console.log('OK: Email Error Response') },
+                    { text: 'Cancel', onPress: () => console.log('CANCEL: Email Error Response', error) }
                 ],
                 { cancelable: true }
             )
-            });
-        }
+        });
+    }
 
 
     return (
@@ -214,7 +213,7 @@ const Report = ({ navigation }) => {
                     <View style={styles.dateView}>
                         <Text style={styles.selecctedDate}>Select Date:</Text>
 
-                        <View style={{ height: hp(5), width: wp(20), marginTop: hp(0.3)}}>
+                        <View style={{ height: hp(5), width: wp(20), marginTop: hp(0.3) }}>
                             <DatePicker
                                 style={{ width: 100 }}
                                 date={startDate}
@@ -256,10 +255,10 @@ const Report = ({ navigation }) => {
                         />
                         <TouchableOpacity onPress={() => writeFile()
 
-                        // Linking.openURL('mailto:mkarusch@gmail.com')
-                        } 
-                        style={styles.emailStyle}>
-                            {/* <Email name="email" size={45} color="#DDD" /> */}
+                            // Linking.openURL('mailto:mkarusch@gmail.com')
+                        }
+                            style={styles.emailStyle}>
+                            <Email name="email" size={45} color="#DDD" />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -268,7 +267,7 @@ const Report = ({ navigation }) => {
                 <View style={{ height: hp(30), width: wp(180), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
 
                     <Table borderStyle={{ borderWidth: 0, }}>
-                        <Row  textStyle={{ fontWeight: 'bold', fontSize: 14}}
+                        <Row textStyle={{ fontWeight: 'bold', fontSize: 14 }}
                             data={tableHead}
                             flexArr={[2, 2.1, 2.2, 2.8, 2.8, 2.8]}
                         />
@@ -276,39 +275,39 @@ const Report = ({ navigation }) => {
                     </Table>
                     <FlatList
                         data={finalReport}
-                        extraData = {finalReport}
+                        extraData={finalReport}
                         renderItem={({ item, index }) =>
                             <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3), flexDirection: 'row' }}>
                                 {console.log("shoeing items here", item)}
                                 <Text
-                                style={{width:wp('20')}}
+                                    style={{ width: wp('20') }}
                                 >
                                     {item.C_Num}
                                 </Text>
                                 <Text
-                                style={{width:wp('30')}}
+                                    style={{ width: wp('30') }}
                                 >
                                     ${item.cost}
                                 </Text>
                                 <Text
-                                style={{width:wp('30')}}
+                                    style={{ width: wp('30') }}
 
                                 >
                                     ${item.retail}
                                 </Text>
                                 <Text
-                                style={{width:wp('30')}}
+                                    style={{ width: wp('30') }}
                                 >
                                     {item.Qty}
                                 </Text>
                                 <Text
-                                    style={{width:wp('30')}}
+                                    style={{ width: wp('30') }}
                                 >
                                     {/* ${item.totalCost} */}
                                     ${item.totalCost ? parseFloat(item.totalCost).toFixed(2) : 0}
                                 </Text>
                                 <Text
-                                style={{width:wp('30')}}
+                                    style={{ width: wp('30') }}
 
                                 >
                                     {/* ${item.totalRetail} */}
@@ -318,8 +317,8 @@ const Report = ({ navigation }) => {
                             </View>
                         }
                     />
-                    
-                    
+
+
                 </View>
             </View>
 
