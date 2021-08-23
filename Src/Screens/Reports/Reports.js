@@ -3,7 +3,7 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    View, FlatList, TouchableOpacity, Linking,
+    View, FlatList, TouchableOpacity, Linking, Alert
 } from 'react-native';
 import HeaderComponent from '../../Components/HeaderComponent/HeaderComponent'
 import Images from '../../Assets/Images/Images'
@@ -17,6 +17,12 @@ import DatePicker from 'react-native-datepicker'
 import BtnComponent from '../../Components/BtnComp/BtnComp'
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import { CSVLink } from "react-csv";
+import { convertArrayToCSV, converter } from 'convert-array-to-csv';
+import RNFetchBlob from 'react-native-fetch-blob'
+import Mailer from 'react-native-mail';
+
+
 
 const Report = ({ navigation }) => {
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
@@ -82,43 +88,100 @@ const Report = ({ navigation }) => {
 
 
             }
-            // console.log("Value of the item in single iteration", array[0].C_Num);
-            // if (array.length == 0) {
-            //     array.push(item);
-            //     console.log("Value of the item in single iteration", array[0].C_Num);
-            // }
-            // if (item.C_Num == array[0].C_Num) {
-            //     console.log("matched", item);
-            //     final.C_Num = item.C_Num
-            //     final.Qty += item.Qty
-            //     final.cost = item.cost
-            //     final.retail = item.retail
-            //     final.totalCost = final.Qty * final.cost
-            //     final.totalRetail = final.Qty * final.retail
+           
             //     setTotalItems(totalItems + final.Qty)
             //     setTotalGrand(totalGrand + final.totalRetail)
-            //     console.log("Arrayyy", final);
-            //     // array.push(item);
-            //     // FinalReportArray.push(final);
-            // } else {
-            //     array.push(item);
-            //     console.log("Not Match", item);
-
-            // }
-
+           
         })
-        // obj[item.C_Num].totalCost = obj[item.C_Num].Qty * obj[item.C_Num].cost
-        // obj[item.C_Num].totalRetail = obj[item.C_Num].Qty * obj[item.C_Num].retail
-
-        // setTotalItems(totalItems + final.Qty)
-        // setTotalGrand(totalGrand + final.totalRetail)
-
+       
 
         setFinalReport(Object.values(obj))
         console.log("final Array to be shown in reports FinalReportArray", FinalReportArray)
 
 
     }
+
+   
+        const header = ['Item Name', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price'];
+        const csvReport = convertArrayToCSV(finalReport, {
+            header,
+            separator: ','
+
+        });
+        const { config, fs } = RNFetchBlob;
+        let DocumentDir = fs.dirs.DocumentDir;
+  
+    // write the current list of answers to a local csv file
+        const pathToWrite = `${DocumentDir}/data.csv`;
+        console.log('pathToWrite', pathToWrite);
+        // pathToWrite /storage/emulated/0/Download/data.csv
+        const writeFile = () => 
+        {
+            RNFetchBlob.fs
+            .writeFile(pathToWrite, csvReport, 'utf8')
+            .then(() => {
+                console.log(`wrote file ${pathToWrite}`);
+                handleEmail(pathToWrite)
+                // wrote file /storage/emulated/0/Download/data.csv
+            })
+            .catch(error => console.error(error));
+        }
+
+//     const createFile = (props) => {
+//     //    const { hotNewThings } = props;
+//     // construct csvString
+//     const headerString = 'thing,timestamp\n';
+//     const rowString = hotNewThings
+//       .map(d => `${d[1]},${d[0].substring(13)}\n`)
+//       .join('');
+//     const csvString = `${headerString}${rowString}`;
+
+//     // write the current list of answers to a local csv file
+//     const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/hot-new-things.csv`;
+//     console.log('pathToWrite', pathToWrite);
+//     RNFetchBlob.fs
+//       .writeFile(pathToWrite, csvString, 'utf8')
+//       .then(() => {
+//         console.log(`wrote file ${pathToWrite}`);
+//       })
+//       .catch(error => console.error(error));
+//   }
+
+        const handleEmail = (pathToWrite) => {
+            Mailer.mail({
+            subject: 'Cash Register Report',
+            recipients: ['irfanoulakh@gmail.com'],
+            ccRecipients: ['malikirfanahmad4@gmail.com'],
+            bccRecipients: ['supportBCC@example.com'],
+            body: '<b>Find Cash Register Report in attachment</b>',
+            customChooserTitle: 'This is my new title', // Android only (defaults to "Send Mail")
+            isHTML: true,
+            attachments: [{
+                // Specify either `path` or `uri` to indicate where to find the file data.
+                // The API used to create or locate the file will usually indicate which it returns.
+                // An absolute path will look like: /cacheDir/photos/some image.jpg
+                // A URI starts with a protocol and looks like: content://appname/cacheDir/photos/some%20image.jpg
+                path: pathToWrite, // The absolute path of the file from which to read data.
+                uri: '', // The uri of the file from which to read the data.
+                // Specify either `type` or `mimeType` to indicate the type of data.
+                type: 'csv', // Mime Type: jpg, png, doc, ppt, html, pdf, csv
+                mimeType: '', // - use only if you want to use custom type
+                name: 'data', // Optional: Custom filename for attachment
+            }]
+            }, (error, event) => {
+                console.log('CANCEL: Email Error Response',error,event)
+            Alert.alert(
+                error,
+                event,
+                [
+                {text: 'Ok', onPress: () => console.log('OK: Email Error Response')},
+                {text: 'Cancel', onPress: () => console.log('CANCEL: Email Error Response',error)}
+                ],
+                { cancelable: true }
+            )
+            });
+        }
+
 
     return (
 
@@ -191,9 +254,12 @@ const Report = ({ navigation }) => {
                             onPress={() => fetchReport()}
 
                         />
+                        <TouchableOpacity onPress={() => writeFile()
 
-                        <TouchableOpacity onPress={() => Linking.openURL('mailto:mkarusch@gmail.com')} style={styles.emailStyle}>
-                            <Email name="email" size={45} color="#DDD" />
+                        // Linking.openURL('mailto:mkarusch@gmail.com')
+                        } 
+                        style={styles.emailStyle}>
+                            {/* <Email name="email" size={45} color="#DDD" /> */}
                         </TouchableOpacity>
                     </View>
                 </View>
