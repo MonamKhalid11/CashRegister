@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
 
     viewTextInput: {
-        height: hp(40), width: wp(90), borderRadius: 10, borderWidth: 5, borderColor: '#DDD', marginTop: wp(20), alignSelf: 'center',
+        height: hp(40), width: wp(90), borderRadius: 10, borderWidth: 5, borderColor: 'grey', marginTop: wp(20), alignSelf: 'center',
     },
     placeHolderText: {
         height: 60, width: wp(80), fontSize: wp(5), marginTop: wp(2), marginLeft: wp(5)
@@ -15,7 +15,7 @@ export default StyleSheet.create({
         marginTop: wp(8)
     },
     btnText: {
-        color: '#fff', fontSize: 30, textAlign: 'center',
+        color: '#fff', fontSize: 30, textAlign: 'center', fontWeight: 'bold'
     },
     lastView: {
         backgroundColor: 'red', height: '13%', width: '100%', position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center'
@@ -24,7 +24,7 @@ export default StyleSheet.create({
         textAlign: 'center', fontSize: 25, fontWeight: 'bold'
     },
     viewForget: {
-        backgroundColor: '#DDD', height: hp(8), width: wp(88), justifyContent: 'center'
+        backgroundColor: 'grey', height: hp(8), width: wp(88), justifyContent: 'center'
     },
     forgetText: {
         color: '#000', textAlign: 'center', fontWeight: 'bold', fontSize: wp(5)

@@ -30,8 +30,8 @@ const ForgetPassword = ({ navigation }) => {
                     <Text style={styles.forgetText}>Please enter new password</Text>
                 </View>
 
-                <TextInput style={styles.placeHolderText} placeholder="New Password" />
-                <TextInput style={styles.placeHolderText} placeholder="Confirm Password" />
+                <TextInput style={styles.placeHolderText} placeholderTextColor={"grey"} placeholder="New Password" />
+                <TextInput style={styles.placeHolderText} placeholderTextColor={"grey"} placeholder="Confirm Password" />
 
                 <TouchableOpacity
                     style={styles.btnStyle}

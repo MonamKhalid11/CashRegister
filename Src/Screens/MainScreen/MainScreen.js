@@ -131,7 +131,7 @@ const MainScreen = ({ navigation }) => {
         console.log('initial array single remove', initialArray);
     }
     const calculation = () => {
-        console.log("showing vlaues here are",amount,totalSale)
+        console.log("showing vlaues here are", amount, totalSale)
         setFinalResult(amount - totalSale);
         Alert.alert(
             // `Change Due : $${finalResult}`,
@@ -243,21 +243,21 @@ const MainScreen = ({ navigation }) => {
 
             <View style={styles.secondView}>
 
-                <TouchableOpacity
+                <View
                     style={styles.toucableView}
                 >
                     <Text style={styles.totalItem}>Total Item</Text>
                     <Text style={styles.textStyle}>{counter ? counter : 0}</Text>
-                </TouchableOpacity>
+                </View>
 
 
-                <TouchableOpacity
+                <View
                     style={styles.toucableView1}
                 >
                     <Text style={styles.totalItem}>Total Sale</Text>
 
                     <Text style={styles.textStyle}>${totalSale ? parseFloat(totalSale).toFixed(2) : 0}</Text>
-                </TouchableOpacity>
+                </View>
 
             </View>
 
@@ -329,6 +329,7 @@ const MainScreen = ({ navigation }) => {
                                 Text={"Submit"}
                                 width={wp(30)}
                                 height={hp(6)}
+                                disabled={dataPushed ? false : true}
                                 onPress={() => {
                                     setModalVisible(false),
                                         setSecmodalVisible(true)
@@ -339,6 +340,7 @@ const MainScreen = ({ navigation }) => {
                                 Text={"Reset"}
                                 width={wp(30)}
                                 height={hp(6)}
+                                disabled={dataPushed ? false : true}
                                 onPress={resetFunction}
                             />
                         </View>
@@ -377,8 +379,7 @@ const MainScreen = ({ navigation }) => {
                         <AppInput
                             placeholder={"Amount Tendered"}
                             marginTop={wp(5)}
-                            // placeholderTextColor={'grey'}
-                            style={{ fontWeight: 'bold', fontSize: wp(7) }}
+                            // placeholderTextColor={"black"}
                             value={amount}
                             onChangeText={setAmount}
                             input={amount}

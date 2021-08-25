@@ -11,6 +11,7 @@ const BtnFunction = props => {
     return (
 
         <TouchableOpacity
+            disabled={props.disabled}
             onPress={props.onPress}
             style={[styles.mainView, { marginTop: marginTop, width: width, height: height }]}>
             {/* <Image source={props.Image} /> */}

@@ -3,8 +3,9 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    View, FlatList, TouchableOpacity, Linking, Alert
+    View, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import HeaderComponent from '../../Components/HeaderComponent/HeaderComponent'
 import Images from '../../Assets/Images/Images'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -49,11 +50,13 @@ const Report = ({ navigation }) => {
     }]
     let newArray = []
     let FinalReportArray = []
+    let count = 0;
 
 
-    useEffect(() => {
+    useFocusEffect(() => {
         Orientation.lockToLandscape();
-    }, [navigation])
+
+    });
 
     const fetchReport = () => {
         console.log("Showing the dates for starting and ending......", dataBase);
@@ -126,26 +129,6 @@ const Report = ({ navigation }) => {
             .catch(error => console.error(error));
     }
 
-    //     const createFile = (props) => {
-    //     //    const { hotNewThings } = props;
-    //     // construct csvString
-    //     const headerString = 'thing,timestamp\n';
-    //     const rowString = hotNewThings
-    //       .map(d => `${d[1]},${d[0].substring(13)}\n`)
-    //       .join('');
-    //     const csvString = `${headerString}${rowString}`;
-
-    //     // write the current list of answers to a local csv file
-    //     const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/hot-new-things.csv`;
-    //     console.log('pathToWrite', pathToWrite);
-    //     RNFetchBlob.fs
-    //       .writeFile(pathToWrite, csvString, 'utf8')
-    //       .then(() => {
-    //         console.log(`wrote file ${pathToWrite}`);
-    //       })
-    //       .catch(error => console.error(error));
-    //   }
-
     const handleEmail = (pathToWrite) => {
         Mailer.mail({
             subject: 'Cash Register Report',
@@ -184,7 +167,7 @@ const Report = ({ navigation }) => {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.HeaderView}>
 
 
@@ -264,7 +247,7 @@ const Report = ({ navigation }) => {
                 </View>
 
 
-                <View style={{ height: hp(30), width: wp(180), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
+                <View style={{ height: hp(30), width: wp(176), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
 
                     <Table borderStyle={{ borderWidth: 0, }}>
                         <Row textStyle={{ fontWeight: 'bold', fontSize: 14 }}
@@ -322,7 +305,7 @@ const Report = ({ navigation }) => {
                 </View>
             </View>
 
-        </View>
+        </SafeAreaView>
 
     )
 
