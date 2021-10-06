@@ -134,6 +134,8 @@ const listingReducer = (state = {
     dataBase: [],
     dataIsPushed: [],
     itemCounter: 0,
+    accessKey: 'C6H12O6',
+    tokenChecked: null,
 
 }, action) => {
     switch (action.type) {
@@ -161,6 +163,10 @@ const listingReducer = (state = {
         case Actions.ITEM_COUNTER:
             return Object.assign({}, state, {
                 itemCounter: action.itemCounter
+            });
+        case Actions.TOKEN_CHECKED:
+            return Object.assign({}, state, {
+                tokenChecked: action.tokenChecked
             });
         default:
             return state;

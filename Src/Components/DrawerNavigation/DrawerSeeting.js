@@ -19,86 +19,86 @@ import FileText from 'react-native-vector-icons/AntDesign';
 class Setting extends Component {
     render() {
         return (
-            <ScrollView contentContainerStyle = {styles.container}>
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}>
+                <View style={styles.container}>
 
-                <View style={styles.LinksContiner}>
-                    <View style={{ flexDirection: 'row', }}>
-                        <Desktop name="iconfontdesktop" size={33} color="#fff" style={{ marginRight: widthPercentageToDP(3) }} />
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('MainScreen')}
-                        >
-                            <Text style={styles.Btnlabel}>Cash Register</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <View style={styles.LinksContiner}>
+                        <View style={{ flexDirection: 'row', }}>
+                            <Desktop name="iconfontdesktop" size={33} color="#fff" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('MainScreen')}
+                            >
+                                <Text style={styles.Btnlabel}>Cash Register</Text>
+                            </TouchableOpacity>
+                        </View>
 
-                    <View style={{ backgroundColor: 'red', height: h(0.4), width: w(70), marginTop: w(3) }} />
+                        <View style={{ backgroundColor: 'red', height: h(0.4), width: w(70), marginTop: w(3) }} />
 
-                    <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <User name="user" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                            <User name="user" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
 
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('ProfileScreen')}
-                            style={styles.Btn} >
-                            <Text style={styles.Btnlabel}>Our Profile</Text>
-                        </TouchableOpacity>
-                    </View>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('ProfileScreen')}
+                                style={styles.Btn} >
+                                <Text style={styles.Btnlabel}>Our Profile</Text>
+                            </TouchableOpacity>
+                        </View>
 
-                    <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <User name="tag" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('CodePriceChange')}
-                            style={styles.Btn} >
-                            <Text style={styles.Btnlabel}>Code Price Change</Text>
-                        </TouchableOpacity>
+                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                            <User name="tag" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('CodePriceChange')}
+                                style={styles.Btn} >
+                                <Text style={styles.Btnlabel}>Code Price Change</Text>
+                            </TouchableOpacity>
 
-                    </View>
+                        </View>
 
 
-                    <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                        {/* <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
                         <Key name="key" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('ForgetPassword')}
                             style={styles.Btn} >
                             <Text style={styles.Btnlabel}>Change Password</Text>
                         </TouchableOpacity>
+                    </View> */}
+
+
+
+                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                            <Report name="bar-graph" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('Reports')}
+                                style={styles.Btn} >
+                                <Text style={styles.Btnlabel}>Report</Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                            <Inform name="infocirlce" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('AboutUs')}
+                                style={styles.Btn} >
+                                <Text style={styles.Btnlabel}>About Us</Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                            <FileText name="filetext1" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('AboutUs')}
+                                style={styles.Btn} >
+                                <Text style={styles.Btnlabel}>Instructions</Text>
+                            </TouchableOpacity>
+                        </View>
+
                     </View>
 
-
-
-                    <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <Report name="bar-graph" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('Reports')}
-                            style={styles.Btn} >
-                            <Text style={styles.Btnlabel}>Report</Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-                    <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <Inform name="infocirlce" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('AboutUs')}
-                            style={styles.Btn} >
-                            <Text style={styles.Btnlabel}>About Us</Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-                    <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                        <FileText name="filetext1" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('AboutUs')}
-                            style={styles.Btn} >
-                            <Text style={styles.Btnlabel}>Instructions</Text>
-                        </TouchableOpacity>
-                    </View>
 
                 </View>
-
-
-            </View>
             </ScrollView>
 
         );

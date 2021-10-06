@@ -20,19 +20,19 @@ export default StyleSheet.create({
         height: hp(36.5), width: wp(100), marginTop: wp(10), paddingHorizontal: wp(5),
     },
     melodyText1: {
-        fontSize: wp(7), fontWeight: 'bold'
+        fontSize: wp(6), fontWeight: 'bold'
     },
     melody2: {
-        fontSize: wp(7), fontWeight: 'bold', marginTop: wp(5)
+        fontSize: wp(6), fontWeight: 'bold', marginTop: wp(5)
     },
     textInput: {
-        height: hp(8), width: wp(80), fontSize: wp(7), marginTop: wp(5)
+        height: hp(6), width: wp(80), fontSize: wp(6), marginVertical: wp('4')
     },
     lastView: {
         backgroundColor: 'red', height: hp(10), width: wp(100), position: 'absolute', bottom: 0, justifyContent: 'center', alignItems: 'center'
     },
     textPeppermint: {
-        textAlign: 'center', fontSize: 25, fontWeight: 'bold'
+        textAlign: 'center', fontSize: 20, fontWeight: 'bold'
     }
 
 })

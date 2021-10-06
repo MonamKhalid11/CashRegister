@@ -24,3 +24,7 @@ export const setItemCounter = (counterParams) => ({
     type: ActionTypes.ITEM_COUNTER,
     itemCounter: counterParams
 })
+export const setTokenChecked = (tokenParams) => ({
+    type: ActionTypes.TOKEN_CHECKED,
+    tokenChecked: tokenParams
+})

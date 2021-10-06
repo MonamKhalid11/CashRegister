@@ -42,14 +42,17 @@ const ProfileScreen = ({ navigation }) => {
 
 
                 <View style={styles.melodyView}>
-                    <Text style={styles.melodyText1}>Melody</Text>
-                    <Text style={styles.melody2}>Melody</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Name"
+                        placeholderTextColor="#000000"
+                    />
 
 
                     <TextInput
                         style={styles.textInput}
                         placeholder="Email Address (Optional)"
-                        placeholderTextColor="#DDD"
+                        placeholderTextColor="#000000"
                     />
 
                 </View>

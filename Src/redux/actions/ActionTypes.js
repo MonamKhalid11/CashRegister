@@ -5,6 +5,9 @@ export const DELETE_VALUE = 'DELETE_VALUE'
 export const REPORT = 'REPORT'
 export const DATA_IS_PUSHED = 'DATA_IS_PUSHED'
 export const ITEM_COUNTER = 'ITEM_COUNTER'
+export const TOKEN_CHECKED = 'TOKEN_CHECKED'
+
+
 
 
 

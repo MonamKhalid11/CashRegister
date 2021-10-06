@@ -15,30 +15,26 @@ import BtnComponent from '../../Components/BtnComp/BtnComp'
 import styles from './Styles'
 import { DrawerActions } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
-import { setItemCounter, setDataDatabaseArray } from '../../redux/actions/listingAction'
-import Report from '../Reports/Reports';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import { setItemCounter, setDataDatabaseArray, setTokenChecked } from '../../redux/actions/listingAction'
+import AccessModal from '../../Components/AccessModal'
 
 
 
 const MainScreen = ({ navigation }) => {
-
-
+    const accessKey = useSelector(state => state.listing.accessKey)
+    const [token, setToken] = useState();
+    let tokenChecked = useSelector(state => state.listing.tokenChecked)
     console.log("shwoing values of data get", dataPushed)
     const dataBase = useSelector(state => state.listing.dataBase)
     console.log("shwoing values of data get database here are", dataBase)
-
-
-
     const listing = useSelector(state => state.listing)
     const initialArray = useSelector(state => state.listing.productList)
     let itemCounter = useSelector(state => state.listing.itemCounter)
     const report = useSelector(state => state.listing.dataBase)
-
     const [tempArray, setTempArray] = useState(null);
     const dispatch = useDispatch()
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
-
     const [modalVisible, setModalVisible] = useState(false);
     const [SecmodalVisible, setSecmodalVisible] = useState(false);
     const [submittedValue, setsubmittedValue] = useState([]);
@@ -47,9 +43,18 @@ const MainScreen = ({ navigation }) => {
     const [dataPushed, setDataPushed] = useState(null);
     const [amount, setAmount] = useState(null);
     const [finalResult, setFinalResult] = useState(null);
+    const [AccessModalVisible, setAccessModalVisible] = useState(false);
+
 
 
     let temp = new Array();
+
+    useEffect(() => {
+        console.log("Value of token check", tokenChecked)
+        if (!tokenChecked) {
+            setAccessModalVisible(true)
+        }
+    }, [])
 
     const reportFunction = () => {
 
@@ -132,10 +137,10 @@ const MainScreen = ({ navigation }) => {
     }
     const calculation = () => {
         console.log("showing vlaues here are", amount, totalSale)
-        setFinalResult(amount - totalSale);
+        let sum = (amount - totalSale).toFixed(2)
         Alert.alert(
             // `Change Due : $${finalResult}`,
-            `Change Due : $${amount - totalSale}`,
+            `Change Due : $${sum}`,
             "",
             [
 
@@ -205,9 +210,17 @@ const MainScreen = ({ navigation }) => {
         console.log('counter .... ', itemCounter);
     }
 
+    const checkAccessToken = () => {
+        if (accessKey == token) {
+            setAccessModalVisible(!AccessModalVisible)
+            dispatch(setTokenChecked(
+                tokenChecked = "checked"
+            ))
+        } else {
+            alert("Not Matched!")
+        }
+    }
     return (
-        // console.log("response of the props is:", props),
-
         <View style={{ flex: 1 }}>
             <View style={styles.HeaderView}>
                 <HeaderComponent
@@ -217,7 +230,6 @@ const MainScreen = ({ navigation }) => {
                     borderWidth={wp(0.2)}
                     openDrawer={toggleDrawer}
                     modal={() => setModalVisible(true)}
-
                 />
             </View>
 
@@ -232,7 +244,7 @@ const MainScreen = ({ navigation }) => {
                     renderItem={({ item, index }) =>
                         <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3) }}>
                             <TouchableOpacity onPress={() => SubmitValuesRedux(item)} style={styles.sectionStyle}>
-                                <Text style={styles.CTextStyle}>Code # {item.C_Num}</Text>
+                                <Text style={styles.CTextStyle}>Code {item.C_Num}</Text>
                                 <Text style={styles.DTextStyle}>${item.retail}</Text>
                             </TouchableOpacity>
                         </View>
@@ -260,7 +272,16 @@ const MainScreen = ({ navigation }) => {
                 </View>
 
             </View>
+            <AccessModal
+                animationType="slide"
+                transparent={true}
+                visible={AccessModalVisible}
+                onChange={(text) => setToken(text)}
+                onPress={checkAccessToken}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
 
+                }} />
             <View>
                 <Modal
                     animationType="slide"
@@ -272,7 +293,7 @@ const MainScreen = ({ navigation }) => {
                     }}
                 >
                     <View style={styles.centeredView}>
-                        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={{ width: wp(9), alignSelf: 'flex-end' }}>
+                        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={{ width: wp(10), alignSelf: 'flex-end', marginTop: wp(7) }}>
                             <Cross name="circle-with-cross" size={35} color="grey" />
                         </TouchableOpacity>
 
@@ -288,7 +309,7 @@ const MainScreen = ({ navigation }) => {
                         <View style={styles.view1} />
 
 
-                        <View style={{ height: hp(15), backgroundColor: '#fff', }}>
+                        <View style={{ height: hp(50), backgroundColor: '#fff' }}>
 
                             <FlatList
                                 data={dataPushed}
@@ -305,7 +326,7 @@ const MainScreen = ({ navigation }) => {
                                             <View style={styles.crossStyle}>
                                                 <CrossSingle
                                                     onPress={() => removeCartItem(item)}
-                                                    name="cross" size={30} color="red" />
+                                                    name="cross" size={29} color="red" />
                                             </View>
 
                                         </View>
@@ -361,66 +382,42 @@ const MainScreen = ({ navigation }) => {
 
                     }}
                 >
-                    <View style={styles.centeredView1}>
-                        <TouchableOpacity onPress={() => setSecmodalVisible(!SecmodalVisible)} style={{ width: wp(8), alignSelf: 'flex-end' }}>
-                            <Cross name="circle-with-cross" size={30} color="grey" />
-                        </TouchableOpacity>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
-                        <Text style={styles.orderDetail1}>More Information</Text>
+                        <View style={styles.centeredView1}>
+                            <TouchableOpacity onPress={() => setSecmodalVisible(!SecmodalVisible)} style={{ width: wp(12), alignSelf: 'flex-end', marginTop: wp(2) }}>
+                                <Cross name="circle-with-cross" size={42} color="grey" />
+                            </TouchableOpacity>
+                            <Text style={styles.orderDetail1}>Check Out</Text>
+                            <View style={styles.View4} />
+                            <View style={styles.textInputs}>
+                                <Text style={styles.texts}>${totalSale ? parseFloat(totalSale).toFixed(2) : 0}</Text>
+                            </View>
+                            <AppInput
+                                placeholder={"Amount Tendered"}
+                                marginTop={wp(5)}
+                                // placeholderTextColor={"black"}
+                                value={amount}
+                                onChangeText={setAmount}
+                                input={amount}
+                            />
+                            <View style={styles.textInputs}>
+                                <Text style={styles.texts}>${finalResult ? parseFloat(finalResult).toFixed(2) : 0}</Text>
+                            </View>
 
-                        <View style={styles.View4} />
-
-
-                        <View style={styles.textInputs}>
-                            <Text style={styles.texts}>${totalSale ? parseFloat(totalSale).toFixed(2) : 0}</Text>
+                            <BtnComponent
+                                Text={"Checkout"}
+                                width={wp(70)}
+                                height={hp(6)}
+                                marginTop={wp(15)}
+                                onPress={calculation}
+                            />
                         </View>
-
-
-                        <AppInput
-                            placeholder={"Amount Tendered"}
-                            marginTop={wp(5)}
-                            // placeholderTextColor={"black"}
-                            value={amount}
-                            onChangeText={setAmount}
-                            input={amount}
-                        />
-
-
-                        <View style={styles.textInputs}>
-                            <Text style={styles.texts}>${finalResult ? parseFloat(finalResult).toFixed(2) : 0}</Text>
-                        </View>
-
-                        <BtnComponent
-
-                            Text={"Checkout"}
-                            width={wp(70)}
-                            height={hp(6)}
-                            marginTop={wp(6)}
-                            onPress={calculation}
-
-                        />
-
-
-
-
-
-                    </View>
+                    </KeyboardAwareScrollView>
                 </Modal>
             </View>
-
-
-
-
-
-
-
-
-
-
-
         </View>
     )
-
 }
 export default MainScreen
 

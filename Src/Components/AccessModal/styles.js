@@ -70,11 +70,11 @@ export default StyleSheet.create({
         // borderRadius: wp(2)
     },
     centeredView1: {
-        height: hp(70),
-        width: wp(94),
+        height: hp(50),
+        width: wp(95),
         backgroundColor: '#fff',
         alignSelf: 'center',
-        marginTop: wp(20),
+        marginTop: wp(30),
         borderRadius: wp(2),
         borderWidth: wp(0.3)
     },
@@ -82,7 +82,7 @@ export default StyleSheet.create({
         fontSize: wp(6), color: '#000', fontWeight: 'bold', textAlign: 'center'
     },
     orderDetail1: {
-        fontSize: wp(6), color: '#000', paddingHorizontal: wp(5), marginTop: wp(-5), fontWeight: 'bold', textAlign: 'center'
+        fontSize: wp(6), color: '#000', fontWeight: 'bold', textAlign: 'center', marginTop: wp('5')
     },
     view1: {
         height: hp(0.15), width: wp(100), backgroundColor: '#000', marginTop: wp(2)
@@ -113,7 +113,7 @@ export default StyleSheet.create({
         flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(2), paddingVertical: wp(2)
     },
     View4: {
-        height: hp(0.4), width: wp(85), backgroundColor: '#000', alignSelf: 'center', marginTop: wp(3)
+        height: hp(0.4), width: wp(85), backgroundColor: '#000', alignSelf: 'center', marginTop: wp('4'), marginBottom: wp('10')
     },
     textInputs: {
         height: hp(6), width: wp(80), backgroundColor: '#DDD', borderRadius: wp(0.7), marginTop: wp(5), alignSelf: 'center', paddingHorizontal: wp(4), justifyContent: 'center'

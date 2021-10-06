@@ -26,12 +26,27 @@ export default StyleSheet.create({
         flexDirection: 'row', justifyContent: 'space-between', marginTop: wp(2), marginRight: wp(15)
     },
     selecctedDate: {
-        fontSize: wp(6), marginLeft: wp(4), fontWeight: 'bold', alignSelf: 'center'
+        fontSize: wp(5.5), marginLeft: wp(4), fontWeight: 'bold', alignSelf: 'center'
     }
     ,
     emailStyle: {
         height: hp(6), width: wp(18), backgroundColor: 'grey', alignItems: 'center', justifyContent: 'center', borderRadius: wp(2)
     },
-    CTextStyle: {
-    }
+    grandBar: {
+        backgroundColor: "grey", marginHorizontal: wp(1), height: wp(6), flexDirection: 'row', justifyContent: 'space-evenly',
+    },
+    grandBarText: {
+        fontSize: wp(4.5), fontWeight: 'bold',
+    },
+    customLoader: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        zIndex: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+    },
 })

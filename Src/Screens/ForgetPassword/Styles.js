@@ -5,14 +5,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
 
     viewTextInput: {
-        height: hp(40), width: wp(90), borderRadius: 10, borderWidth: 5, borderColor: 'grey', marginTop: wp(20), alignSelf: 'center',
+        height: hp(50), width: wp(90), borderRadius: 10, borderWidth: 5, borderColor: 'grey', marginTop: wp(20), alignSelf: 'center',
     },
     placeHolderText: {
         height: 60, width: wp(80), fontSize: wp(5), marginTop: wp(2), marginLeft: wp(5)
     },
     btnStyle: {
         height: 60, width: wp(70), alignSelf: 'center', justifyContent: 'center', backgroundColor: '#36454F',
-        marginTop: wp(8)
+        marginTop: wp(12)
     },
     btnText: {
         color: '#fff', fontSize: 30, textAlign: 'center', fontWeight: 'bold'

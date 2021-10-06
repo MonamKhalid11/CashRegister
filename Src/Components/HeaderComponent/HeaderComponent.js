@@ -14,17 +14,17 @@ const HeaderComponent = (props) => {
 
     return (
         // console.log("response of the header comp=>", props),
-        <View style={{ height: hp(15), width: wp(100) }}>
+        <View style={{ height: hp(10), width: wp(100), }}>
 
             <View style={{ flexDirection: 'row', paddingHorizontal: wp(5), justifyContent: 'space-between' }}>
 
                 <TouchableOpacity
                     onPress={props.openDrawer}
                     style={{ height: hp(5.5), width: wp(12), backgroundColor: '#fff', borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center' }}>
-                    <Icon name="menu" size={30} color="grey" style={{ marginTop: wp(1.5) }} />
+                    <Icon name="menu" size={30} color="grey" style={{ marginTop: wp(1) }} />
                 </TouchableOpacity>
 
-                <Text style={{ fontSize: wp(7), fontWeight: 'bold', color: 'red', alignSelf: 'center', marginLeft: wp(2) }}>
+                <Text style={{ fontSize: wp(5.5), fontWeight: 'bold', color: 'red', alignSelf: 'center', marginLeft: wp(2) }}>
                     {props.CashRegister}
                 </Text>
                 <TouchableOpacity

@@ -8,11 +8,14 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
 import Check from 'react-native-vector-icons/Entypo';
 import BtnComponent from '../../Components/BtnComp/BtnComp'
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import HeaderComponent from '../../Components/HeaderComponent/HeaderComponent'
 import styles from './Styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { showListing } from '../../redux/actions/listingAction'
+import CheckBox from '@react-native-community/checkbox'
+
+
 const CodePriceChange = ({ navigation }) => {
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
     const dispatch = useDispatch()
@@ -23,7 +26,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
         },
@@ -33,7 +36,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -44,7 +47,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -55,7 +58,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -66,7 +69,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -77,7 +80,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -88,7 +91,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -99,7 +102,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
         },
@@ -109,7 +112,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
         },
@@ -119,7 +122,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
 
@@ -130,7 +133,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
         },
@@ -140,7 +143,7 @@ const CodePriceChange = ({ navigation }) => {
             Qty: 0,
             cost: 0.25,
             retail: 0.25,
-            isChecked: false,
+            isChecked: true,
             grandTotal: 0,
             grand: 0,
         }
@@ -149,43 +152,49 @@ const CodePriceChange = ({ navigation }) => {
     dispatch(showListing(
         isCode
     ))
+    let temp = new Array();
 
+    const [isSelected, setSelection] = useState(true);
     const updateValuesRedux = () => {
-        console.log("showing is submit ", isCode)
+        console.log("showing is submit ", temp)
+        isCode.map((item) => {
+            if (item.isChecked == true) {
+                temp.push(item)
+            }
+        })
         dispatch(showListing(
-            isCode
+            temp
         ))
+        temp = [];
         alert("Code Price Update Successful")
     }
     return (
-        <View style={{ flex: 1 }}>
+        <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.HeaderView}>
                 <HeaderComponent
                     CashRegister={"Code Price Change"}
                     openDrawer={toggleDrawer}
-
                 />
             </View>
-
             <View style={styles.costStyle}>
                 <Text style={styles.topText}>Cost</Text>
                 <Text style={styles.topText}>Retail</Text>
             </View>
 
-            <View style={{ flex: 0.9 }}>
+            <View style={{ flex: 1 }}>
                 <FlatList
                     data={isCode}
                     keyExtractor={item => item.id}
                     renderItem={({ item, index }) =>
                         <View style={styles.flatlistView}>
-                            <Text style={styles.costStyler}>Code # $:</Text>
-                            <TextInput keyboardType='number-pad' style={styles.textInputStyle}
-                             onChangeText={(value) => {
+                            <Text style={styles.costStyler}>Code {item.C_Num}:</Text>
+                            <TextInput keyboardType='decimal-pad' style={styles.textInputStyle}
+                                onChangeText={(value) => {
                                     item.cost = parseFloat(value)
                                 }}>
                                 <Text style={styles.costStyler}>{item.cost}</Text>
                             </TextInput>
-                            <TextInput keyboardType='number-pad' style={styles.textInputStyle}
+                            <TextInput keyboardType='decimal-pad' style={styles.textInputStyle}
                                 onChangeText={(values) => {
                                     item.retail = parseFloat(values)
                                 }}
@@ -193,8 +202,19 @@ const CodePriceChange = ({ navigation }) => {
                                 <Text style={styles.costStyler}>{item.retail}</Text>
 
                             </TextInput>
-                            <View style={styles.checkBoxStyle}>
-                                <Check name="check" size={30} color="green" />
+                            <View
+                                style={styles.checkBoxStyle}
+                            >
+                                <CheckBox
+                                    boxType={"square"}
+                                    onTintColor={"green"}
+                                    onCheckColor={"green"}
+                                    value={isSelected}
+                                    onValueChange={(setSelection) => {
+                                        item.isChecked = setSelection
+                                    }}
+                                    style={styles.checkbox}
+                                />
                             </View>
                         </View>
 
@@ -212,11 +232,10 @@ const CodePriceChange = ({ navigation }) => {
                     Text={"Submit"}
                     width={wp(80)}
                     height={hp(7)}
-                    onPress={()=> updateValuesRedux()}
+                    onPress={() => updateValuesRedux()}
                 />
             </View>
-
-        </View>
+        </KeyboardAwareScrollView>
     )
 
 
