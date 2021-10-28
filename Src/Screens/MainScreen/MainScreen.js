@@ -18,7 +18,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { setItemCounter, setDataDatabaseArray, setTokenChecked } from '../../redux/actions/listingAction'
 import AccessModal from '../../Components/AccessModal'
-
+import Orientation from 'react-native-orientation';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const MainScreen = ({ navigation }) => {
@@ -56,6 +57,10 @@ const MainScreen = ({ navigation }) => {
         }
     }, [])
 
+    useFocusEffect(() => {
+        Orientation.lockToPortrait();
+    });
+
     const reportFunction = () => {
 
         console.log("Showing the dates for starting and ending......", initialArray);
@@ -77,7 +82,6 @@ const MainScreen = ({ navigation }) => {
             }
 
         })
-        finalArray.createdDate = new Date().toISOString().substring(0, 10)
         dispatch(setDataDatabaseArray(finalArray))
 
         finalArray = []
@@ -278,10 +282,7 @@ const MainScreen = ({ navigation }) => {
                 visible={AccessModalVisible}
                 onChange={(text) => setToken(text)}
                 onPress={checkAccessToken}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-
-                }} />
+            />
             <View>
                 <Modal
                     animationType="slide"

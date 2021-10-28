@@ -23,7 +23,7 @@ export default StyleSheet.create({
         fontSize: wp(5.5), fontWeight: 'bold', color: 'grey'
     },
     textInputStyle: {
-        height: hp(5.5), width: wp(16), borderRadius: wp(1), borderWidth: wp(0.2), alignItems: 'center', justifyContent: 'center', fontSize: wp(5), fontWeight: 'bold', padding: wp(1)
+        height: hp(5.5), width: wp(26), borderRadius: wp(1), borderWidth: wp(0.2), alignItems: 'center', justifyContent: 'center', fontSize: wp(5), fontWeight: 'bold', padding: wp(1)
     }
 
 })

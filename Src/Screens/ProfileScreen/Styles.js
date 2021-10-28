@@ -17,7 +17,7 @@ export default StyleSheet.create({
         fontSize: wp(4), fontWeight: 'bold'
     },
     melodyView: {
-        height: hp(36.5), width: wp(100), marginTop: wp(10), paddingHorizontal: wp(5),
+        height: hp(43.5), width: wp(100), marginTop: wp(10), paddingHorizontal: wp(5),
     },
     melodyText1: {
         fontSize: wp(6), fontWeight: 'bold'

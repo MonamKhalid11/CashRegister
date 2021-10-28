@@ -76,7 +76,7 @@ class Setting extends Component {
                         </View>
 
 
-                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                        {/* <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
                             <Inform name="infocirlce" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('AboutUs')}
@@ -93,7 +93,7 @@ class Setting extends Component {
                                 style={styles.Btn} >
                                 <Text style={styles.Btnlabel}>Instructions</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
 
                     </View>
 

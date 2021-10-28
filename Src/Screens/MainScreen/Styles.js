@@ -43,7 +43,6 @@ export default StyleSheet.create({
     },
     ViewFlatList: {
         flex: 0.80,
-
     },
     secondView: {
         flex: 0.17, flexDirection: 'row', justifyContent: 'space-between',

@@ -49,4 +49,14 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0,0.2)',
     },
+    text: {
+        color: '#000000',
+        fontSize: wp(5),
+    },
+    bottomLine: {
+        padding: wp('4'),
+        justifyContent: 'center',
+        borderBottomWidth: 0.7,
+        borderColor: '#000000',
+    },
 })

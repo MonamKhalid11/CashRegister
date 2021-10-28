@@ -12,13 +12,9 @@ export const submitValue = (submittingParams) => ({
 export const deleteValue = () => ({
     type: ActionTypes.DELETE_VALUE,
 })
-export const makeReport = (reportParams) => ({
-    type: ActionTypes.REPORT,
-    report: reportParams
-})
 export const setDataDatabaseArray = (dataParams) => ({
     type: ActionTypes.DATA_IS_PUSHED,
-    dataIsPushed: dataParams
+    dataBase: dataParams
 })
 export const setItemCounter = (counterParams) => ({
     type: ActionTypes.ITEM_COUNTER,
@@ -27,4 +23,8 @@ export const setItemCounter = (counterParams) => ({
 export const setTokenChecked = (tokenParams) => ({
     type: ActionTypes.TOKEN_CHECKED,
     tokenChecked: tokenParams
+})
+export const saveUser = (userParam) => ({
+    type: ActionTypes.USER,
+    user: userParam
 })
