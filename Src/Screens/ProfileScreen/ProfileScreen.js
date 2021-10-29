@@ -35,8 +35,6 @@ const ProfileScreen = ({ navigation }) => {
         }
         dispatch(saveUser(user))
         alert("Saved!")
-
-
     }
 
     useEffect(() => {
@@ -55,21 +53,14 @@ const ProfileScreen = ({ navigation }) => {
                     <HeaderComponent
                         CashRegister={"Our Profile"}
                         openDrawer={toggleDrawer}
-
                     />
                 </View>
-
-
                 <View style={styles.firstView} />
-
                 <View style={styles.schoolView}>
                     <View style={styles.innerView}>
                         <Text style={styles.enterSchool}>Please enter your school...</Text>
                     </View>
-
                 </View>
-
-
                 <View style={styles.melodyView}>
                     <TextInput
                         style={styles.textInput}
@@ -78,8 +69,6 @@ const ProfileScreen = ({ navigation }) => {
                         onChangeText={(text) => setName(text)}
                         placeholderTextColor="#000000"
                     />
-
-
                     <TextInput
                         style={styles.textInput}
                         value={email}
@@ -96,15 +85,10 @@ const ProfileScreen = ({ navigation }) => {
                         marginTop={hp(2)}
                         onPress={saveDetails}
                     />
-
                 </View>
-
                 <View style={styles.lastView}>
                     <Text style={styles.textPeppermint} >Peppermint Lane Holiday Shop</Text>
                 </View>
-
-
-
             </View>
         </KeyboardAwareScrollView>
     )

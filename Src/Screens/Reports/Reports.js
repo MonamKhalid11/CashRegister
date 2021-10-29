@@ -5,31 +5,22 @@ import {
     Text,
     View, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert, ActivityIndicator, Platform
 } from 'react-native';
-import { NavigationHelpersContext, useFocusEffect } from '@react-navigation/native';
-import HeaderComponent from '../../Components/HeaderComponent/HeaderComponent'
-import Images from '../../Assets/Images/Images'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import styles from './Styles'
 import Orientation from 'react-native-orientation';
-// import Orientation from 'react-native-orientation-locker';
-// import { OrientationLocker, PORTRAIT, LANDSCAPE } from "react-native-orientation-locker";
 import Icon from 'react-native-vector-icons/Feather';
 import Email from 'react-native-vector-icons/MaterialCommunityIcons';
-// import DatePicker from 'react-native-datepicker'
 import DatePicker from './Components'
 import BtnComponent from '../../Components/BtnComp/BtnComp'
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
-import { CSVLink } from "react-csv";
-import { convertArrayToCSV, converter } from 'convert-array-to-csv';
-import RNFetchBlob from 'react-native-fetch-blob'
 import Mailer from 'react-native-mail';
 import XLSX from 'xlsx';
 import moment from 'moment'
 var RNFS = require('react-native-fs');
 import { useNavigationState } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native'
-
+import { useIsFocused } from '@react-navigation/native';
+import { useDrawerStatus } from '@react-navigation/drawer';
 
 const Report = ({ navigation, props }) => {
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
@@ -44,10 +35,8 @@ const Report = ({ navigation, props }) => {
     const [isLoader, setIsLoader] = useState(false);
     const [show, setShow] = useState(false);
     const [visible, setVisible] = useState(false);
-    const nav = useNavigation()
-
-
-
+    const isFocused = useIsFocused();
+    const isDrawerOpen = useDrawerStatus() === 'open';
 
     let items = 0
     let costs = 0
@@ -63,36 +52,31 @@ const Report = ({ navigation, props }) => {
             </View>
         ) : null;
     }
-    useFocusEffect(() => {
-        Orientation.lockToLandscape()
-    });
-    useEffect(() => {
-        if (routeName === 'Reports') {
+    React.useEffect(() => {
+        if (isFocused && routeName === 'Reports') {
             Orientation.lockToLandscape()
         }
-    }, [nav])
+        if (isDrawerOpen) {
+            Orientation.lockToPortrait()
+        }
+    })
 
     const state = useNavigationState(state => state);
     const routeName = (state.routeNames[state.index]);
     console.log(routeName);
     console.log("state", state)
 
-
     const grandFunction = () => {
         FinalReportArray.map((item, index) => {
             items += item.Qty
             costs += item.totalCost
             retails += item.totalRetail
-
         })
         setTotalItems(items)
         setTotalGrand(costs)
         setTotalRetail(retails)
         setIsLoader(false)
-
-
     }
-
     const fetchReport = () => {
         setIsLoader(true)
         dataBase.map((value, index) => {
@@ -120,7 +104,6 @@ const Report = ({ navigation, props }) => {
                 obje[item.C_Num].Qty = item.Qty
                 obje[item.C_Num].totalCost = obje[item.C_Num].Qty * obje[item.C_Num].cost
                 obje[item.C_Num].totalRetail = obje[item.C_Num].Qty * obje[item.C_Num].retail
-
             }
         })
         FinalReportArray = Object.values(obje)
@@ -128,14 +111,9 @@ const Report = ({ navigation, props }) => {
         setTimeout(() => {
             grandFunction()
         }, 1000);
-
-
     }
-    //.....
     let header = [['Code #', 'Cost', 'Retail', 'Total Unit', 'Total Cost', 'Total Price']];
-
     const exportDataToExcel = () => {
-
         let sample_data_to_export = finalReport;
         let wb = XLSX.utils.book_new();
         let ws = XLSX.utils.json_to_sheet(sample_data_to_export)
@@ -143,19 +121,14 @@ const Report = ({ navigation, props }) => {
         XLSX.utils.sheet_add_json(ws, sample_data_to_export, { origin: 'A2', skipHeader: true });
         XLSX.utils.book_append_sheet(wb, ws, "Report")
         const wbout = XLSX.write(wb, { type: 'binary', bookType: "xlsx" });
-
-        // Write generated excel to Storage
         var path = RNFS.DocumentDirectoryPath + '/Cash Register Report.xlsx';
-
         RNFS.writeFile(path, wbout, 'ascii').then((r) => {
             console.log('Success', path);
             handleEmail(path)
         }).catch((e) => {
             console.log('Error', e);
         });
-
     }
-
     const handleEmail = (pathToWrite) => {
         Mailer.mail({
             subject: 'Cash Register Report',
@@ -163,16 +136,10 @@ const Report = ({ navigation, props }) => {
             ccRecipients: ['malikirfanahmad4@gmail.com'],
             bccRecipients: ['supportBCC@example.com'],
             body: '<b>Find Cash Register Report in attachment</b>',
-            // customChooserTitle: 'This is my new title', // Android only (defaults to "Send Mail")
             isHTML: true,
             attachments: [{
-                // Specify either `path` or `uri` to indicate where to find the file data.
-                // The API used to create or locate the file will usually indicate which it returns.
-                // An absolute path will look like: /cacheDir/photos/some image.jpg
-                // A URI starts with a protocol and looks like: content://appname/cacheDir/photos/some%20image.jpg
                 path: pathToWrite, // The absolute path of the file from which to read data.
                 uri: '', // The uri of the file from which to read the data.
-                // Specify either `type` or `mimeType` to indicate the type of data.
                 type: 'xlsx', // Mime Type: jpg, png, doc, ppt, html, pdf, csv
                 mimeType: '', // - use only if you want to use custom type
                 name: 'Cash Register Report', // Optional: Custom filename for attachment
@@ -192,7 +159,6 @@ const Report = ({ navigation, props }) => {
                 { cancelable: true }
             )
         });
-
     }
     const erase = () => {
         FinalReportArray = []
@@ -201,7 +167,6 @@ const Report = ({ navigation, props }) => {
         setTotalGrand(0)
         setTotalRetail(0)
     }
-
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || startDate;
         setStartDate(currentDate);
@@ -210,9 +175,7 @@ const Report = ({ navigation, props }) => {
         const currentDate = selected || endDate;
         setEndDate(currentDate);
     }
-
     return (
-
         <SafeAreaView style={{ flex: 1 }}>
             {renderLoader()}
             <View style={styles.HeaderView}>
@@ -221,23 +184,18 @@ const Report = ({ navigation, props }) => {
                         onPress={() => {
                             Orientation.lockToPortrait(),
                                 toggleDrawer()
-
                         }}
                         style={styles.toucable}>
                         <Icon name="menu" size={30} color="grey" style={{ marginTop: wp(1.5) }} />
                     </TouchableOpacity>
-
                     <Text style={styles.reportText}>
                         Reports
                         </Text>
                 </View>
                 <View style={styles.redView} />
             </View>
-
-
             <View style={styles.lastView}>
                 <View style={styles.innerLastView}>
-
                     <View style={styles.dateView}>
                         <Text style={styles.selecctedDate}>Select Date:</Text>
 
@@ -255,7 +213,6 @@ const Report = ({ navigation, props }) => {
                                 onChange={onChangeCaught}
                                 mode={"date"}
                                 value={endDate}
-                            // display={Platform.OS == 'ios' ? 'default' : 'default'}
                             />
                         </View>
                         <BtnComponent
@@ -263,11 +220,8 @@ const Report = ({ navigation, props }) => {
                             width={wp(30)}
                             height={hp(6)}
                             onPress={() => fetchReport()}
-
                         />
                         <TouchableOpacity onPress={() => exportDataToExcel()
-
-                            // Linking.openURL('mailto:mkarusch@gmail.com')
                         }
                             style={styles.emailStyle}>
                             <Email name="email" size={45} color="#DDD" />
@@ -281,7 +235,7 @@ const Report = ({ navigation, props }) => {
                     <Table borderStyle={{ borderWidth: 0, }}>
                         <Row textStyle={{ fontWeight: 'bold', fontSize: 14 }}
                             data={tableHead}
-                            flexArr={[2, 2.1, 2.2, 2.8, 2.8, 2.8]}
+                            flexArr={[2, 2.6, 2.2, 2.8, 2.8, 2.8]}
                         />
 
                     </Table>
@@ -316,14 +270,12 @@ const Report = ({ navigation, props }) => {
                                 <Text
                                     style={{ width: wp('30') }}
                                 >
-                                    {/* ${item.totalCost} */}
                                     ${item.totalCost ? parseFloat(item.totalCost).toFixed(2) : 0}
                                 </Text>
                                 <Text
                                     style={{ width: wp('30') }}
 
                                 >
-                                    {/* ${item.totalRetail} */}
                                     ${item.totalRetail ? parseFloat(item.totalRetail).toFixed(2) : 0}
                                 </Text>
 

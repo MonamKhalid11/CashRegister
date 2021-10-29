@@ -18,7 +18,6 @@ import Orientation from 'react-native-orientation';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-
 const CodePriceChange = ({ navigation }) => {
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
     const dispatch = useDispatch()
@@ -338,7 +337,6 @@ const CodePriceChange = ({ navigation }) => {
 
     const [isSelected, setSelection] = useState(true);
     const updateValuesRedux = () => {
-        console.log("showing is submit ", temp)
         isCode.map((item) => {
             if (item.isChecked == true) {
                 temp.push(item)
@@ -366,7 +364,6 @@ const CodePriceChange = ({ navigation }) => {
                 <Text style={styles.topText}>Cost</Text>
                 <Text style={styles.topText}>Retail</Text>
             </View>
-
             <View style={{ flex: 1 }}>
                 <FlatList
                     data={isCode}
@@ -386,7 +383,6 @@ const CodePriceChange = ({ navigation }) => {
                                 }}
                             >
                                 <Text style={styles.costStyler}>{item.retail}</Text>
-
                             </TextInput>
                             <View
                                 style={styles.checkBoxStyle}
@@ -403,17 +399,10 @@ const CodePriceChange = ({ navigation }) => {
                                 />
                             </View>
                         </View>
-
                     }
                 />
-
-
-
             </View>
-
             <View style={{ height: hp(10), width: wp(100) }}>
-
-
                 <BtnComponent
                     Text={"Submit"}
                     width={wp(80)}

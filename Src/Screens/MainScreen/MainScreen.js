@@ -26,9 +26,7 @@ const MainScreen = ({ navigation }) => {
     const accessKey = useSelector(state => state.listing.accessKey)
     const [token, setToken] = useState();
     let tokenChecked = useSelector(state => state.listing.tokenChecked)
-    console.log("shwoing values of data get", dataPushed)
     const dataBase = useSelector(state => state.listing.dataBase)
-    console.log("shwoing values of data get database here are", dataBase)
     const listing = useSelector(state => state.listing)
     const initialArray = useSelector(state => state.listing.productList)
     let itemCounter = useSelector(state => state.listing.itemCounter)
@@ -45,28 +43,17 @@ const MainScreen = ({ navigation }) => {
     const [amount, setAmount] = useState(null);
     const [finalResult, setFinalResult] = useState(null);
     const [AccessModalVisible, setAccessModalVisible] = useState(false);
-
-
-
     let temp = new Array();
-
     useEffect(() => {
-        console.log("Value of token check", tokenChecked)
         if (!tokenChecked) {
             setAccessModalVisible(true)
         }
     }, [])
-
     useFocusEffect(() => {
         Orientation.lockToPortrait();
     });
-
     const reportFunction = () => {
-
-        console.log("Showing the dates for starting and ending......", initialArray);
-        console.log("Showing the dates for starting and ending >>>>>>>>>>>", dataPushed);
         let finalArray = []
-
         initialArray.map((item, index) => {
             const tempItem = { ...item };
             if (tempItem.id != dataPushed.id) {
@@ -83,12 +70,8 @@ const MainScreen = ({ navigation }) => {
 
         })
         dispatch(setDataDatabaseArray(finalArray))
-
         finalArray = []
-        console.log('new reports...', temp);
         setTempArray(temp);
-
-        console.log("Matched items.........<<<<<<<<", temp);
     }
 
     const resetFunction = () => {
@@ -106,8 +89,6 @@ const MainScreen = ({ navigation }) => {
             itemCounter = 0
         ))
     }
-
-
     const removeCartItem = (item) => {
         if (item.Qty === 1) {
             var lists = dataPushed.filter(x => {
@@ -119,9 +100,6 @@ const MainScreen = ({ navigation }) => {
             setTotalSale(totalSale - item.retail)
         } else {
             let objIndex = dataPushed.findIndex((obj => obj.id == item.id));
-            //Log object to Console.
-            console.log("Before update: ", dataPushed[objIndex])
-            //Update object's name property.
             dataPushed[objIndex].Qty = dataPushed[objIndex].Qty - 1
             dataPushed[objIndex].grandTotal = dataPushed[objIndex].grandTotal - dataPushed[objIndex].retail
             setTotalSale(dataPushed[objIndex].grand = totalSale - dataPushed[objIndex].retail)
@@ -131,23 +109,17 @@ const MainScreen = ({ navigation }) => {
         dispatch(setItemCounter(
             itemCounter -= 1
         ))
-        console.log('counter .... ', itemCounter);
-
-        // console.log('datapushed....',datapushed);
         if (itemCounter == 0) {
             resetFunction();
         }
-        console.log('initial array single remove', initialArray);
     }
     const calculation = () => {
-        console.log("showing vlaues here are", amount, totalSale)
         let sum = (amount - totalSale).toFixed(2)
         Alert.alert(
             // `Change Due : $${finalResult}`,
             `Change Due : $${sum}`,
             "",
             [
-
                 {
                     text: "New Sale",
                     onPress: checkoutFunction,
@@ -158,18 +130,13 @@ const MainScreen = ({ navigation }) => {
     }
     const checkoutFunction = () => {
         reportFunction();
-        console.log("Showing submitted values for showing next in reports.....", report)
         setSecmodalVisible(false)
         setAmount(null);
         setFinalResult(null);
-        // setTotalSale(null);
-        // setCounter(null);
-        // setDataPushed(null);
         resetFunction();
 
     }
     const SubmitValuesRedux = (item) => {
-        console.log("Item add........ ", item)
         if (dataPushed == null) {
             item.Qty = item.Qty + 1
             item.grandTotal = item.grandTotal + item.retail
@@ -188,30 +155,15 @@ const MainScreen = ({ navigation }) => {
             }
             else {
                 let objIndex = dataPushed.findIndex((obj => obj.id == item.id));
-
-                //Log object to Console.
-                console.log("Before update: ", dataPushed[objIndex])
-
-                //Update object's name property.
                 dataPushed[objIndex].Qty = dataPushed[objIndex].Qty + 1
                 dataPushed[objIndex].grandTotal = dataPushed[objIndex].grandTotal + dataPushed[objIndex].retail
                 setTotalSale(dataPushed[objIndex].grand = totalSale + dataPushed[objIndex].retail)
                 setCounter(counter + 1)
-                //Log object to console again.
-                console.log("After update: ", dataPushed[objIndex])
-                console.log("After update: objIndex", objIndex)
-
-                console.log("data Pushed Array is..........", dataPushed);
-
-
-
             }
         }
-        console.log("showing final results are ", dataPushed);
         dispatch(setItemCounter(
             itemCounter += 1
         ))
-        console.log('counter .... ', itemCounter);
     }
 
     const checkAccessToken = () => {
@@ -255,18 +207,13 @@ const MainScreen = ({ navigation }) => {
                     }
                 />
             </View>
-
-
             <View style={styles.secondView}>
-
                 <View
                     style={styles.toucableView}
                 >
                     <Text style={styles.totalItem}>Total Item</Text>
                     <Text style={styles.textStyle}>{counter ? counter : 0}</Text>
                 </View>
-
-
                 <View
                     style={styles.toucableView1}
                 >
@@ -297,31 +244,23 @@ const MainScreen = ({ navigation }) => {
                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={{ width: wp(10), alignSelf: 'flex-end', marginTop: wp(7) }}>
                             <Cross name="circle-with-cross" size={35} color="grey" />
                         </TouchableOpacity>
-
                         <Text style={styles.orderDetail}>Order Details</Text>
                         <View style={styles.view1} />
-
                         <View style={styles.itemText1}>
                             <Text style={styles.itemText}>ITEM</Text>
                             <Text style={styles.itemText}>QTY</Text>
                             <Text style={styles.itemText}>PRICE</Text>
                         </View>
-
                         <View style={styles.view1} />
-
-
                         <View style={{ height: hp(50), backgroundColor: '#fff' }}>
-
                             <FlatList
                                 data={dataPushed}
                                 extraData={dataPushed}
                                 keyExtractor={item => item.id}
                                 renderItem={({ item, index }) =>
                                     <View style={styles.modalFLatList}>
-
                                         <Text style={styles.codeDesign}>Code # {item.C_Num}</Text>
                                         <Text style={styles.codeDesign}>{item.Qty}</Text>
-
                                         <View style={{ flexDirection: 'row' }}>
                                             <Text style={styles.codeDesign}>${item.grandTotal ? parseFloat(item.grandTotal).toFixed(2) : 0}</Text>
                                             <View style={styles.crossStyle}>
@@ -329,13 +268,10 @@ const MainScreen = ({ navigation }) => {
                                                     onPress={() => removeCartItem(item)}
                                                     name="cross" size={29} color="red" />
                                             </View>
-
                                         </View>
-
                                     </View>
                                 } />
                         </View>
-
                         <View style={styles.lastView}>
                             <Text style={styles.totalItem1}>Total Item</Text>
                             <Text style={styles.totalItem1}>{counter ? counter : 0}</Text>
@@ -344,8 +280,6 @@ const MainScreen = ({ navigation }) => {
                             <Text style={styles.totalItem1}>Total Sale</Text>
                             <Text style={styles.totalItem1}>${totalSale ? parseFloat(totalSale).toFixed(2) : 0}</Text>
                         </View>
-
-
                         <View style={styles.btnStyle}>
                             <BtnComponent
                                 Text={"Submit"}
@@ -356,7 +290,6 @@ const MainScreen = ({ navigation }) => {
                                     setModalVisible(false),
                                         setSecmodalVisible(true)
                                 }}
-
                             />
                             <BtnComponent
                                 Text={"Reset"}
@@ -366,13 +299,9 @@ const MainScreen = ({ navigation }) => {
                                 onPress={resetFunction}
                             />
                         </View>
-
-
-
                     </View>
                 </Modal>
             </View>
-
             <View>
                 <Modal
                     animationType="slide"
@@ -397,7 +326,6 @@ const MainScreen = ({ navigation }) => {
                             <AppInput
                                 placeholder={"Amount Tendered"}
                                 marginTop={wp(5)}
-                                // placeholderTextColor={"black"}
                                 value={amount}
                                 onChangeText={setAmount}
                                 input={amount}
@@ -405,7 +333,6 @@ const MainScreen = ({ navigation }) => {
                             <View style={styles.textInputs}>
                                 <Text style={styles.texts}>${finalResult ? parseFloat(finalResult).toFixed(2) : 0}</Text>
                             </View>
-
                             <BtnComponent
                                 Text={"Checkout"}
                                 width={wp(70)}
