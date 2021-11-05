@@ -24,6 +24,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const MainScreen = ({ navigation }) => {
     const accessKey = useSelector(state => state.listing.accessKey)
+    const givingtreeKey = useSelector(state => state.listing.givingtreeKey)
     const [token, setToken] = useState();
     let tokenChecked = useSelector(state => state.listing.tokenChecked)
     const dataBase = useSelector(state => state.listing.dataBase)
@@ -43,6 +44,8 @@ const MainScreen = ({ navigation }) => {
     const [amount, setAmount] = useState(null);
     const [finalResult, setFinalResult] = useState(null);
     const [AccessModalVisible, setAccessModalVisible] = useState(false);
+    const [mode, setMode] = useState(false);
+
     let temp = new Array();
     useEffect(() => {
         if (!tokenChecked) {
@@ -167,10 +170,16 @@ const MainScreen = ({ navigation }) => {
     }
 
     const checkAccessToken = () => {
-        if (accessKey == token) {
+        if (token == accessKey) {
+            setMode(true)
             setAccessModalVisible(!AccessModalVisible)
             dispatch(setTokenChecked(
-                tokenChecked = "checked"
+                tokenChecked = "peppermint"
+            ))
+        } else if (token == givingtreeKey) {
+            setAccessModalVisible(!AccessModalVisible)
+            dispatch(setTokenChecked(
+                tokenChecked = "givingtree"
             ))
         } else {
             alert("Not Matched!")
@@ -193,9 +202,9 @@ const MainScreen = ({ navigation }) => {
 
 
                 <FlatList
-                    data={listing.productList}
+                    data={mode ? listing.productList : listing.givingtreeList}
                     numColumns={3}
-                    extraData={listing.productList}
+                    extraData={mode ? listing.productList : listing.givingtreeList}
                     keyExtractor={item => item.id}
                     renderItem={({ item, index }) =>
                         <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3) }}>
