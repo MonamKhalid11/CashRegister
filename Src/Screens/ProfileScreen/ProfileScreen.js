@@ -19,13 +19,23 @@ import BtnComponent from '../../Components/BtnComp/BtnComp'
 import Orientation from 'react-native-orientation';
 import { useFocusEffect } from '@react-navigation/native';
 
-
 const ProfileScreen = ({ navigation }) => {
     const user = useSelector(state => state.listing.user)
+    const tokenChecked = useSelector(state => state.listing.tokenChecked)
+
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [shopName, setShopName] = useState('')
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (tokenChecked == "peppermint") {
+            setShopName("Peppermint Lane Holiday Shop")
+        } else if (tokenChecked == "givingtree") {
+            setShopName("Giving Tree Holiday Shop")
+        }
+    }, [])
 
 
     const saveDetails = () => {
@@ -87,7 +97,7 @@ const ProfileScreen = ({ navigation }) => {
                     />
                 </View>
                 <View style={styles.lastView}>
-                    <Text style={styles.textPeppermint} >Peppermint Lane Holiday Shop</Text>
+                    <Text style={styles.textPeppermint}>{shopName}</Text>
                 </View>
             </View>
         </KeyboardAwareScrollView>

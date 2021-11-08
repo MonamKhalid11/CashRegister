@@ -6030,11 +6030,6 @@ react-native-mail@^6.1.1:
   resolved "https://registry.npmjs.org/react-native-mail/-/react-native-mail-6.1.1.tgz"
   integrity sha512-pTs180wwyh7hN/iyTC9SfOX579U4YhDlHOLxi47IGvhPJENqO/QFdBq+wWKxyhNqdQuVSy+LoeIxLreWnIeYmg==
 
-react-native-orientation-locker@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-orientation-locker/-/react-native-orientation-locker-1.3.1.tgz#e47cfdd4a7390df6ccdbc748a6eca9e8be953b0d"
-  integrity sha512-BJPe/GvGO8nNdtqQat30CS9H2o+Qt8hv9AMYCxLS5l5k5+BP3FLScU2+GBg2DizDQCOnTtA24o8heI7kwy+rvw==
-
 react-native-orientation@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/react-native-orientation/-/react-native-orientation-3.1.3.tgz"

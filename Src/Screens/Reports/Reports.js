@@ -36,7 +36,7 @@ const Report = ({ navigation, props }) => {
     const [totalGrand, setTotalGrand] = useState(0);
     const [isLoader, setIsLoader] = useState(false);
     const [show, setShow] = useState(false);
-    const [mode, setMode] = useState(false);
+    const [email, setEmail] = useState('')
     const [visible, setVisible] = useState(false);
     const isFocused = useIsFocused();
     const isDrawerOpen = useDrawerStatus() === 'open';
@@ -57,11 +57,11 @@ const Report = ({ navigation, props }) => {
     }
     useEffect(() => {
         if (tokenChecked == "peppermint") {
-            setMode(true)
+            setEmail("mkarusch@gmail.com")
         } else if (tokenChecked == "givingtree") {
-            setMode(false)
+            setEmail("joysgifts4kids@aol.com")
         }
-    })
+    }, [])
 
     React.useEffect(() => {
         if (isFocused && routeName === 'Reports') {
@@ -143,7 +143,7 @@ const Report = ({ navigation, props }) => {
     const handleEmail = (pathToWrite) => {
         Mailer.mail({
             subject: 'Cash Register Report',
-            recipients: [mode ? 'mkarusch@gmail.com' : 'joysgifts4kids@aol.com'],
+            recipients: [email],
             ccRecipients: ['joe@bluetonemedia.com'],
             bccRecipients: [userEmail],
             body: '<b>Find Cash Register Report in attachment</b>',
