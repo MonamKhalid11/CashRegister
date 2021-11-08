@@ -25,6 +25,8 @@ import { useDrawerStatus } from '@react-navigation/drawer';
 const Report = ({ navigation, props }) => {
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
     const dataBase = useSelector(state => state.listing.dataBase)
+    const userEmail = useSelector(state => state?.listing?.user?.email)
+    const tokenChecked = useSelector(state => state?.listing?.tokenChecked)
     const [finalReport, setFinalReport] = useState([]);
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
@@ -34,6 +36,7 @@ const Report = ({ navigation, props }) => {
     const [totalGrand, setTotalGrand] = useState(0);
     const [isLoader, setIsLoader] = useState(false);
     const [show, setShow] = useState(false);
+    const [mode, setMode] = useState(false);
     const [visible, setVisible] = useState(false);
     const isFocused = useIsFocused();
     const isDrawerOpen = useDrawerStatus() === 'open';
@@ -52,6 +55,14 @@ const Report = ({ navigation, props }) => {
             </View>
         ) : null;
     }
+    useEffect(() => {
+        if (tokenChecked == "peppermint") {
+            setMode(true)
+        } else if (tokenChecked == "givingtree") {
+            setMode(false)
+        }
+    })
+
     React.useEffect(() => {
         if (isFocused && routeName === 'Reports') {
             Orientation.lockToLandscape()
@@ -132,9 +143,9 @@ const Report = ({ navigation, props }) => {
     const handleEmail = (pathToWrite) => {
         Mailer.mail({
             subject: 'Cash Register Report',
-            recipients: ['irfanoulakh@gmail.com'],
-            ccRecipients: ['malikirfanahmad4@gmail.com'],
-            bccRecipients: ['supportBCC@example.com'],
+            recipients: [mode ? 'mkarusch@gmail.com' : 'joysgifts4kids@aol.com'],
+            ccRecipients: ['joe@bluetonemedia.com'],
+            bccRecipients: [userEmail],
             body: '<b>Find Cash Register Report in attachment</b>',
             isHTML: true,
             attachments: [{
@@ -231,7 +242,6 @@ const Report = ({ navigation, props }) => {
 
 
                 <View style={{ height: hp(30), width: wp(176), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
-                    {/* {console.log("ShoW.>>> in Render Components ", finalReport)} */}
                     <Table borderStyle={{ borderWidth: 0, }}>
                         <Row textStyle={{ fontWeight: 'bold', fontSize: 14 }}
                             data={tableHead}
@@ -282,15 +292,12 @@ const Report = ({ navigation, props }) => {
                             </View>
                         }
                     />
-
-
                 </View>
                 <View style={styles.grandBar}>
                     <Text style={styles.grandBarText}>{"Total                     "}</Text>
                     <Text style={styles.grandBarText}>{totalItems}</Text>
                     <Text style={styles.grandBarText}>${totalGrand ? parseFloat(totalGrand).toFixed(2) : 0}</Text>
                     <Text style={styles.grandBarText}>${totalRetail ? parseFloat(totalRetail).toFixed(2) : 0}</Text>
-
                 </View>
             </View>
 

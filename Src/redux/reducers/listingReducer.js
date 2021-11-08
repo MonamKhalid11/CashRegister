@@ -310,8 +310,6 @@ const listingReducer = (state = {
         }
 
     ],
-
-
     // givingtree list 
     givingtreeList: [
         {
@@ -624,21 +622,25 @@ const listingReducer = (state = {
 
     ],
 
-
     cart: null,
     dataBase: [],
     itemCounter: 0,
     accessKey: 'peppermint21',
     givingtreeKey: 'givingtree21',
     tokenChecked: null,
-    user: null
+    user: null,
+    productsList: [],
+    codePriceList: []
 
 }, action) => {
     switch (action.type) {
         case Actions.SHOW_LISTING:
-            console.log("showing states", state.productList)
             return Object.assign({}, state, {
-                productList: action.listing
+                productsList: action.listing
+            });
+        case Actions.CODE_PRICE_CHANGE:
+            return Object.assign({}, state, {
+                codePriceList: action.codePriceChange
             });
         case Actions.SUBMIT_VALUE:
             return Object.assign({}, state, {
