@@ -734,19 +734,36 @@ const MainScreen = ({ navigation }) => {
         }
     }
     const calculation = () => {
-        let sum = (amount - totalSale).toFixed(2)
-        Alert.alert(
-            // `Change Due : $${finalResult}`,
-            `Change Due : $${sum}`,
-            "",
-            [
-                {
-                    text: "New Sale",
-                    onPress: checkoutFunction,
-                    style: "cancel"
-                },
-            ]
-        );
+        if(amount < totalSale) {
+            Alert.alert(
+                // `Change Due : $${finalResult}`,
+                `Low Balance`,
+                "Entered amount is less than total sale!",
+                [
+                    {
+                        text: "Increase amount tendered",
+                        // onPress: checkoutFunction,
+                        style: "cancel"
+                    },
+                ]
+            );
+        }
+        else{
+            let sum = (amount - totalSale).toFixed(2)
+            Alert.alert(
+                // `Change Due : $${finalResult}`,
+                `Change Due : $${sum}`,
+                "",
+                [
+                    {
+                        text: "New Sale",
+                        onPress: checkoutFunction,
+                        style: "cancel"
+                    },
+                ]
+            );
+        }
+       
     }
     const checkoutFunction = () => {
         reportFunction();
