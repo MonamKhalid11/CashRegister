@@ -132,7 +132,7 @@ const Report = ({ navigation, props }) => {
         XLSX.utils.sheet_add_json(ws, sample_data_to_export, { origin: 'A2', skipHeader: true });
         XLSX.utils.book_append_sheet(wb, ws, "Report")
         const wbout = XLSX.write(wb, { type: 'binary', bookType: "xlsx" });
-        var path = RNFS.DocumentDirectoryPath + '/Cash Register Report.xlsx';
+        var path = RNFS.DocumentDirectoryPath + '/Holiday Cash Register Report.xlsx';
         RNFS.writeFile(path, wbout, 'ascii').then((r) => {
             console.log('Success', path);
             handleEmail(path)
@@ -142,18 +142,18 @@ const Report = ({ navigation, props }) => {
     }
     const handleEmail = (pathToWrite) => {
         Mailer.mail({
-            subject: 'Cash Register Report',
-            recipients: [email],
+            subject: 'Holiday Cash Register Report',
+            recipients: [email ? email : ''],
             ccRecipients: ['joe@bluetonemedia.com'],
-            bccRecipients: [userEmail],
-            body: '<b>Find Cash Register Report in attachment</b>',
+            bccRecipients: [userEmail ? userEmail : ''],
+            body: '<b>Find Holiday Cash Register Report in attachment</b>',
             isHTML: true,
             attachments: [{
                 path: pathToWrite, // The absolute path of the file from which to read data.
                 uri: '', // The uri of the file from which to read the data.
                 type: 'xlsx', // Mime Type: jpg, png, doc, ppt, html, pdf, csv
                 mimeType: '', // - use only if you want to use custom type
-                name: 'Cash Register Report', // Optional: Custom filename for attachment
+                name: 'Holiday Cash Register Report', // Optional: Custom filename for attachment
             }]
         }, (error, event) => {
             console.log('CANCEL: Email Error Response', error, event)

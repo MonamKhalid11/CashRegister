@@ -28,7 +28,7 @@ class Setting extends Component {
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('MainScreen')}
                             >
-                                <Text style={styles.Btnlabel}>Cash Register</Text>
+                                <Text style={styles.Btnlabel}>Holiday Cash Register</Text>
                             </TouchableOpacity>
                         </View>
 

@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import HeaderComponent from '../../Components/HeaderComponent/HeaderComponent'
 import styles from './Styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { showListing } from '../../redux/actions/listingAction'
+import { showListing, setCodePriceChange } from '../../redux/actions/listingAction'
 import CheckBox from '@react-native-community/checkbox'
 import Orientation from 'react-native-orientation';
 import { useFocusEffect } from '@react-navigation/native';
@@ -20,17 +20,16 @@ import { useFocusEffect } from '@react-navigation/native';
 const CodePriceChange = ({ navigation }) => {
     const codePriceList = useSelector(state => state.listing.codePriceList)
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
-    const [mode, setMode] = useState(false);
     const dispatch = useDispatch()
     let temp = new Array();
-
-    const [isSelected, setSelection] = useState(true);
     const updateValuesRedux = () => {
         codePriceList.map((item) => {
             if (item.isChecked == true) {
                 temp.push(item)
             }
         })
+        dispatch(setCodePriceChange(codePriceList
+        ))
         dispatch(showListing(
             temp
         ))
@@ -80,7 +79,7 @@ const CodePriceChange = ({ navigation }) => {
                                     boxType={"square"}
                                     onTintColor={"green"}
                                     onCheckColor={"green"}
-                                    value={isSelected}
+                                    value={item.isChecked}
                                     onValueChange={(setSelection) => {
                                         item.isChecked = setSelection
                                     }}

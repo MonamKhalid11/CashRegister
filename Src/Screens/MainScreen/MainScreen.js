@@ -817,7 +817,7 @@ const MainScreen = ({ navigation }) => {
         <View style={{ flex: 1 }}>
             <View style={styles.HeaderView}>
                 <HeaderComponent
-                    CashRegister={"Cash Register"}
+                    CashRegister={"Holiday Cash Register"}
                     shoppingCart={Images.ic_shoppingCart}
                     backgroundColor={'#fff'}
                     borderWidth={wp(0.2)}
