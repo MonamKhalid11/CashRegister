@@ -32,7 +32,7 @@ export default StyleSheet.create({
     CTextStyle: {
         color: 'red',
         fontWeight: 'bold',
-        fontSize: wp(5.5),
+        fontSize: wp(5),
         textAlign: 'center',
     },
     DTextStyle: {

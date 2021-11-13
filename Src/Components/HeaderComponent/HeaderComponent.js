@@ -20,19 +20,19 @@ const HeaderComponent = (props) => {
 
                 <TouchableOpacity
                     onPress={props.openDrawer}
-                    style={{ height: hp(5.5), width: wp(12), backgroundColor: '#fff', borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center' }}>
-                    <Icon name="menu" size={30} color="grey" style={{ marginTop: wp(1) }} />
+                    style={{ height: hp(5), width: wp(10), backgroundColor: '#fff', borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center', marginLeft: wp(1)}}>
+                    <Icon name="menu" size={30} color="grey" />
                 </TouchableOpacity>
 
-                <Text style={{ fontSize: wp(5.5), fontWeight: 'bold', color: 'red', alignSelf: 'center', marginLeft: wp(2) }}>
+                <Text style={{ fontSize: wp(5), fontWeight: 'bold', color: 'red', alignSelf: 'center' }}>
                     {props.CashRegister}
                 </Text>
                 <TouchableOpacity
                     onPress={props.modal}
                 // style={styles.sectionStyle}
                 >
-                    <View style={{ backgroundColor: props.backgroundColor, borderWidth: props.borderWidth, borderRadius: wp(1), alignItems: 'center', height: hp(6), width: wp(13) }}>
-                        <Image source={props.shoppingCart} style={{ height: hp(6), width: wp(9), tintColor: 'grey' }} resizeMode='contain' />
+                    <View style={{ backgroundColor: props.backgroundColor, borderWidth: props.borderWidth, borderRadius: wp(1), alignItems: 'center', height: hp(5.5), width: wp(12), marginRight: wp(1) }}>
+                        <Image source={props.shoppingCart} style={{ height: hp(5), width: wp(8), tintColor: 'grey' }} resizeMode='contain' />
                     </View>
                 </TouchableOpacity>
 
