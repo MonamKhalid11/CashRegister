@@ -3,7 +3,7 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    View, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert, ActivityIndicator, Platform
+    View, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert, ActivityIndicator
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import styles from './Styles'
@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import Mailer from 'react-native-mail';
 import XLSX from 'xlsx';
+import DeviceInfo from 'react-native-device-info';
+import { isTablet } from 'react-native-device-info';
 import moment from 'moment'
 var RNFS = require('react-native-fs');
 import { useNavigationState } from '@react-navigation/native';
@@ -70,10 +72,19 @@ const Report = ({ navigation, props }) => {
         if (isDrawerOpen) {
             Orientation.lockToPortrait()
         }
+
+        let version = DeviceInfo.getSystemVersion()
+        let iPad = DeviceInfo.isTablet()
+        console.log("Version is ", version, " and device is iPad", iPad)
+        if (isTablet()) {
+            console.log("Your are using iPad")
+        } else {
+            console.log("Your are using iPhone")
+        }
     })
 
     const state = useNavigationState(state => state);
-    const routeName = (state.routeNames[state.index]);
+    const routeName = (state?.routeNames[state.index]);
     console.log(routeName);
     console.log("state", state)
 
