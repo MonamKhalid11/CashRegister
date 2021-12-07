@@ -13,6 +13,9 @@ export default StyleSheet.create({
     innerView: {
         alignSelf: 'center', justifyContent: 'center', width: wp(25), marginTop: wp(2)
     },
+    innerViewTab: {
+        alignSelf: 'center', justifyContent: 'center', width: wp(50), marginTop: wp(2)
+    },
     enterSchool: {
         fontSize: wp(4), fontWeight: 'bold'
     },
