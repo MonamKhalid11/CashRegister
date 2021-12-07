@@ -252,7 +252,7 @@ const Report = ({ navigation, props }) => {
                 </View>
 
 
-                <View style={{ height: hp(30), width: wp(176), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
+                <View style={{ height: hp(23), width: wp(176), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
                     <Table borderStyle={{ borderWidth: 0, }}>
                         <Row textStyle={{ fontWeight: 'bold', fontSize: 14 }}
                             data={tableHead}
