@@ -734,7 +734,7 @@ const MainScreen = ({ navigation }) => {
         }
     }
     const calculation = () => {
-        if(amount < totalSale) {
+        if (amount < totalSale) {
             Alert.alert(
                 // `Change Due : $${finalResult}`,
                 `Low Balance`,
@@ -748,7 +748,7 @@ const MainScreen = ({ navigation }) => {
                 ]
             );
         }
-        else{
+        else {
             let sum = (amount - totalSale).toFixed(2)
             Alert.alert(
                 // `Change Due : $${finalResult}`,
@@ -763,7 +763,7 @@ const MainScreen = ({ navigation }) => {
                 ]
             );
         }
-       
+
     }
     const checkoutFunction = () => {
         reportFunction();

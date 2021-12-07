@@ -3,7 +3,7 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    View, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert, ActivityIndicator, Platform
+    View, SafeAreaView, FlatList, TouchableOpacity, Linking, Alert, ActivityIndicator
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import styles from './Styles'
@@ -13,10 +13,11 @@ import Email from 'react-native-vector-icons/MaterialCommunityIcons';
 import DatePicker from './Components'
 import BtnComponent from '../../Components/BtnComp/BtnComp'
 import { useDispatch, useSelector } from 'react-redux'
-import DeviceInfo from 'react-native-device-info';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import Mailer from 'react-native-mail';
 import XLSX from 'xlsx';
+import DeviceInfo from 'react-native-device-info';
+import { isTablet } from 'react-native-device-info';
 import moment from 'moment'
 var RNFS = require('react-native-fs');
 import { useNavigationState } from '@react-navigation/native';
@@ -65,8 +66,6 @@ const Report = ({ navigation, props }) => {
         }
     }, [])
 
-    const state = useNavigationState(state => state);
-    const routeName = (state.routeNames[state.index]);
 
     React.useEffect(() => {
         if (isFocused && routeName === 'Reports') {
@@ -75,10 +74,22 @@ const Report = ({ navigation, props }) => {
         if (isDrawerOpen) {
             Orientation.lockToPortrait()
         }
-        setIsTab(DeviceInfo.isTablet())
+
+        let version = DeviceInfo.getSystemVersion()
+        let iPad = DeviceInfo.isTablet()
+        console.log("Version is ", version, " and device is iPad", iPad)
+        if (isTablet()) {
+            console.log("Your are using iPad")
+        } else {
+            console.log("Your are using iPhone")
+        }
     })
 
-    
+    const state = useNavigationState(state => state);
+    const routeName = (state?.routeNames[state.index]);
+    console.log(routeName);
+    console.log("state", state)
+
     const grandFunction = () => {
         FinalReportArray.map((item, index) => {
             items += item.Qty
@@ -243,9 +254,9 @@ const Report = ({ navigation, props }) => {
                 </View>
 
 
-                <View style={isTab ? styles.tableContainerTab : styles.tableContainer}>
-                    <Table borderStyle={{ borderWidth: 0 }}>
-                        <Row textStyle={isTab ? { fontWeight: 'bold', fontSize: 22 }:{ fontWeight: 'bold', fontSize: 14 }}
+                <View style={{ height: hp(23), width: wp(176), alignSelf: 'center', marginTop: wp(2), borderWidth: wp(1.2), borderColor: 'grey' }}>
+                    <Table borderStyle={{ borderWidth: 0, }}>
+                        <Row textStyle={{ fontWeight: 'bold', fontSize: 14 }}
                             data={tableHead}
                             flexArr={[2, 2.6, 2.2, 2.8, 2.8, 2.8]}
                         />
