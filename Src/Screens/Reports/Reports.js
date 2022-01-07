@@ -41,6 +41,7 @@ const Report = ({ navigation, props }) => {
     const [email, setEmail] = useState('')
     const [visible, setVisible] = useState(false);
     const isFocused = useIsFocused();
+    const [isTab, setIsTab] = useState(false);
     const isDrawerOpen = useDrawerStatus() === 'open';
 
     let items = 0
@@ -64,6 +65,7 @@ const Report = ({ navigation, props }) => {
             setEmail("joysgifts4kids@aol.com")
         }
     }, [])
+
 
     React.useEffect(() => {
         if (isFocused && routeName === 'Reports') {
@@ -208,20 +210,20 @@ const Report = ({ navigation, props }) => {
                                 toggleDrawer()
                         }}
                         style={styles.toucable}>
-                        <Icon name="menu" size={30} color="grey" style={{ marginTop: wp(1.5) }} />
+                        <Icon name="menu" size={isTab ? 50 : 30} color="grey"  />
                     </TouchableOpacity>
-                    <Text style={styles.reportText}>
+                    <Text style={isTab ? styles.reportTextTab : styles.reportText}>
                         Reports
                         </Text>
                 </View>
                 <View style={styles.redView} />
             </View>
             <View style={styles.lastView}>
-                <View style={styles.innerLastView}>
-                    <View style={styles.dateView}>
-                        <Text style={styles.selecctedDate}>Select Date:</Text>
+                <View style={isTab ? styles.innerLastViewTab : styles.innerLastView}>
+                    <View style={isTab ? styles.dateViewTab : styles.dateView}>
+                        <Text style={isTab ? styles.selecctedDateTab: styles.selecctedDate}>Select Date:</Text>
 
-                        <View style={{ height: hp(5), width: wp(25), marginTop: hp(0.4), }}>
+                        <View style={isTab?  styles.datePickerTab :  styles.datePicker}>
                             <DatePicker
                                 show={show}
                                 onChange={onChange}
@@ -229,7 +231,7 @@ const Report = ({ navigation, props }) => {
                                 value={startDate}
                             />
                         </View>
-                        <View style={{ height: hp(5), width: wp(25), marginTop: hp(0.3) }}>
+                        <View style={isTab?  styles.datePickerTab :  styles.datePicker}>
                             <DatePicker
                                 show={visible}
                                 onChange={onChangeCaught}
@@ -239,13 +241,13 @@ const Report = ({ navigation, props }) => {
                         </View>
                         <BtnComponent
                             Text={"Submit"}
-                            width={wp(30)}
-                            height={hp(6)}
+                            width={isTab? wp(25) : wp(30)}
+                            height={isTab ? hp(5.5): hp(6)}
                             onPress={() => fetchReport()}
                         />
                         <TouchableOpacity onPress={() => exportDataToExcel()
                         }
-                            style={styles.emailStyle}>
+                            style={ isTab ? styles.emailStyleTab : styles.emailStyle}>
                             <Email name="email" size={45} color="#DDD" />
                         </TouchableOpacity>
                     </View>
@@ -268,33 +270,33 @@ const Report = ({ navigation, props }) => {
                             <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3), flexDirection: 'row' }}>
                                 {/* {console.log("shoeing items here", item)} */}
                                 <Text
-                                    style={{ width: wp('20') }}
+                                    style={isTab ? { width: wp('14'), fontSize: wp(2.5)}: { width: wp('20') }}
                                 >
                                     {item.C_Num}
                                 </Text>
                                 <Text
-                                    style={{ width: wp('30') }}
+                                    style={isTab ? { width: wp('23'), fontSize: wp(2.5) }: { width: wp('30') }}
                                 >
                                     ${item.cost}
                                 </Text>
                                 <Text
-                                    style={{ width: wp('30') }}
+                                    style={isTab ? { width: wp('25') , fontSize: wp(2.5)}: { width: wp('30') }}
 
                                 >
                                     ${item.retail}
                                 </Text>
                                 <Text
-                                    style={{ width: wp('30') }}
+                                    style={isTab ? { width: wp('22'), fontSize: wp(2.5) }: { width: wp('30') }}
                                 >
                                     {item.Qty}
                                 </Text>
                                 <Text
-                                    style={{ width: wp('30') }}
+                                    style={isTab ? { width: wp('25') , fontSize: wp(2.5)}: { width: wp('30') }}
                                 >
                                     ${item.totalCost ? parseFloat(item.totalCost).toFixed(2) : 0}
                                 </Text>
                                 <Text
-                                    style={{ width: wp('30') }}
+                                    style={isTab ? { width: wp('30'), fontSize: wp(2.5) } : { width: wp('30') }}
 
                                 >
                                     ${item.totalRetail ? parseFloat(item.totalRetail).toFixed(2) : 0}

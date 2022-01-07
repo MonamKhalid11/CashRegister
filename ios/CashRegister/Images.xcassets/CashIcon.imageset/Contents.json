@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "CapmusLogo.png",
+      "filename" : "cash-register-logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CapmusLogo-1.png",
+      "filename" : "cash-register-logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "CapmusLogo-2.png",
+      "filename" : "cash-register-logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

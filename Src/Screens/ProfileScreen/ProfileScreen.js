@@ -8,6 +8,7 @@ import {
     useColorScheme,
     View, TextInput, Button, Touchable, TouchableOpacity
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import HeaderComponent from '../../Components/HeaderComponent/HeaderComponent'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, } from 'react-native-responsive-screen';
 import styles from './Styles'
@@ -27,6 +28,7 @@ const ProfileScreen = ({ navigation }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [shopName, setShopName] = useState('')
+    const [isTab, setIsTab] = useState(false);
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -54,6 +56,7 @@ const ProfileScreen = ({ navigation }) => {
 
     useFocusEffect(() => {
         Orientation.lockToPortrait();
+        setIsTab(DeviceInfo.isTablet())
     });
 
     return (
@@ -67,7 +70,7 @@ const ProfileScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.firstView} />
                 <View style={styles.schoolView}>
-                    <View style={styles.innerView}>
+                    <View style={isTab ? styles.innerViewTab : styles.innerView}>
                         <Text style={styles.enterSchool}>Please enter your school...</Text>
                     </View>
                 </View>
