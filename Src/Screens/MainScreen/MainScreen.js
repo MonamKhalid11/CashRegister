@@ -20,11 +20,13 @@ import { setItemCounter, setDataDatabaseArray, setTokenChecked, showListing, set
 import AccessModal from '../../Components/AccessModal'
 import Orientation from 'react-native-orientation';
 import { useFocusEffect } from '@react-navigation/native';
+import moment from 'moment'
+
 
 
 const MainScreen = ({ navigation }) => {
-    const accessKey = useSelector(state => state.listing.accessKey)
-    const givingtreeKey = useSelector(state => state.listing.givingtreeKey)
+    // const accessKey = useSelector(state => state.listing.accessKey)
+    // const givingtreeKey = useSelector(state => state.listing.givingtreeKey)
     const [token, setToken] = useState();
     let tokenChecked = useSelector(state => state.listing.tokenChecked)
     const productsList = useSelector(state => state.listing.productsList)
@@ -39,6 +41,9 @@ const MainScreen = ({ navigation }) => {
     const [totalSale, setTotalSale] = useState(null);
     const [dataPushed, setDataPushed] = useState(null);
     const [amount, setAmount] = useState(null);
+    const [peppermintkey, setPeppermintkey] = useState('');
+    const [givingtreekey, setGivingtreekey] = useState('');
+
     const [finalResult, setFinalResult] = useState(null);
     const [AccessModalVisible, setAccessModalVisible] = useState(false);
     const [mode, setMode] = useState(false);
@@ -666,6 +671,37 @@ const MainScreen = ({ navigation }) => {
     let temp = new Array();
     useEffect(() => {
         if (!tokenChecked) {
+            let formated = moment(new Date()).format('YYYY')
+            switch (formated) {
+                case '2022':
+                    console.log("its 2022");
+                    setPeppermintkey('peppermintlane22')
+                    setGivingtreekey('givingtree22')
+                    break;
+                case '2023':
+                    console.log("its 2023");
+                    setPeppermintkey('peppermintlane23')
+                    setGivingtreekey('givingtree23')
+                    break;
+                case '2024':
+                    console.log("its 2024");
+                    setPeppermintkey('peppermintlane24')
+                    setGivingtreekey('givingtree24')
+                    break;
+                case '2025':
+                    console.log("its 2025");
+                    setPeppermintkey('peppermintlane25')
+                    setGivingtreekey('givingtree25')
+                    break;
+                case '2026':
+                    console.log("its 2026");
+                    setPeppermintkey('peppermintlane26')
+                    setGivingtreekey('givingtree26')
+                    break;
+                default:
+                    console.warn("Contact support")
+
+            }
             setAccessModalVisible(true)
         }
     }, [])
@@ -804,7 +840,7 @@ const MainScreen = ({ navigation }) => {
     }
 
     const checkAccessToken = () => {
-        if (token == accessKey) {
+        if (token == peppermintkey) {
             setMode(true)
             setAccessModalVisible(!AccessModalVisible)
             dispatch(setTokenChecked(
@@ -816,7 +852,7 @@ const MainScreen = ({ navigation }) => {
                 ))
 
             )
-        } else if (token == givingtreeKey) {
+        } else if (token == givingtreekey) {
             setAccessModalVisible(!AccessModalVisible)
             dispatch(setTokenChecked(
                 tokenChecked = "givingtree"
@@ -848,11 +884,11 @@ const MainScreen = ({ navigation }) => {
 
                 <FlatList
                     data={productsList}
-                    numColumns={3}
+                    numColumns={4}
                     extraData={productsList}
                     keyExtractor={item => item.id}
                     renderItem={({ item, index }) =>
-                        <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(3) }}>
+                        <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(2.4) }}>
                             <TouchableOpacity onPress={() => SubmitValuesRedux(item)} style={styles.sectionStyle}>
                                 <Text style={styles.CTextStyle}>Code {item.C_Num}</Text>
                                 <Text style={styles.DTextStyle}>${item.retail}</Text>
@@ -984,9 +1020,9 @@ const MainScreen = ({ navigation }) => {
                                 onChangeText={setAmount}
                                 input={amount}
                             />
-                            <View style={styles.textInputs}>
+                            {/* <View style={styles.textInputs}>
                                 <Text style={styles.texts}>${finalResult ? parseFloat(finalResult).toFixed(2) : 0}</Text>
-                            </View>
+                            </View> */}
                             <BtnComponent
                                 Text={"Checkout"}
                                 width={wp(70)}

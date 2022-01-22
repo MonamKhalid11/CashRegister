@@ -76,7 +76,7 @@ class Setting extends Component {
                         </View>
 
 
-                        {/* <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
                             <Inform name="infocirlce" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('AboutUs')}
@@ -86,14 +86,14 @@ class Setting extends Component {
                         </View>
 
 
-                        <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
+                        {/* <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
                             <FileText name="filetext1" size={33} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('AboutUs')}
                                 style={styles.Btn} >
                                 <Text style={styles.Btnlabel}>Instructions</Text>
                             </TouchableOpacity>
-                        </View> */}
+                        </View>  */}
 
                     </View>
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     },
     Btnlabel:
     {
-        fontSize: h('2.9%'),
+        fontSize: h('2.8%'),
         color: '#fff',
         fontWeight: 'bold', marginRight: w(19), width: w(80)
     }

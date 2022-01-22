@@ -9,8 +9,8 @@ export default StyleSheet.create({
     },
     sectionStyle: {
         marginTop: wp(5),
-        height: hp(16),
-        width: wp(27),
+        height: hp(10),
+        width: wp(20),
         borderRadius: wp(1),
         borderWidth: wp(0.4),
         borderColor: 'grey',
@@ -32,13 +32,13 @@ export default StyleSheet.create({
     CTextStyle: {
         color: 'red',
         fontWeight: 'bold',
-        fontSize: wp(5),
+        fontSize: wp(4.5),
         textAlign: 'center',
     },
     DTextStyle: {
         color: 'grey',
         fontWeight: 'bold',
-        fontSize: wp(5),
+        fontSize: wp(4.5),
         textAlign: 'center',
     },
     ViewFlatList: {
@@ -69,7 +69,7 @@ export default StyleSheet.create({
         // borderRadius: wp(2)
     },
     centeredView1: {
-        height: hp(70),
+        height: hp(65),
         width: wp(94),
         backgroundColor: '#fff',
         alignSelf: 'center',

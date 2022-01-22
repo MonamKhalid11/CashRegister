@@ -8,13 +8,14 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Feather';
+import images from '../../Assets/Images/Images';
 
 
 
 const HeaderComponent = (props) => {
     const [isTab, setIsTab] = useState(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         setIsTab(DeviceInfo.isTablet())
     })
     return (
@@ -25,13 +26,17 @@ const HeaderComponent = (props) => {
 
                 <TouchableOpacity
                     onPress={props.openDrawer}
-                    style={{ height: hp(5), width: wp(10), backgroundColor: '#fff', borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center', marginLeft: wp(1)}}>
+                    style={{ height: hp(5), width: wp(10), backgroundColor: '#fff', borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center', marginLeft: wp(1) }}>
                     <Icon name="menu" size={isTab ? 50 : 30} color="grey" />
                 </TouchableOpacity>
+                {props.CashRegister == "Holiday Cash Register" ?
+                    <Image source={images.appLogo} style={{ height: hp(6), width: wp(26) }} />
+                    :
 
-                <Text style={{ fontSize: wp(5), fontWeight: 'bold', color: 'red', alignSelf: 'center' }}>
-                    {props.CashRegister}
-                </Text>
+                    <Text style={{ fontSize: wp(5), fontWeight: 'bold', color: 'red', alignSelf: 'center' }}>
+                        {props.CashRegister}
+                    </Text>
+                }
                 <TouchableOpacity
                     onPress={props.modal}
                 // style={styles.sectionStyle}
