@@ -21,8 +21,8 @@ export default StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: wp('100'),
-    height: wp('65'),
+    width: wp('70'),
+    height: wp('35'),
     resizeMode: 'contain',
     alignSelf: 'center',
   },
