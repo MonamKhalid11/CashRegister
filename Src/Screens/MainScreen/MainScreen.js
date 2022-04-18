@@ -260,8 +260,8 @@ const MainScreen = ({ navigation }) => {
             id: 20,
             C_Num: 21,
             Qty: 0,
-            cost: 0.00,
-            retail: 0.00,
+            cost: 9.00,
+            retail: 10.00,
             isChecked: true,
             grandTotal: 0,
             grand: 0,
@@ -270,8 +270,8 @@ const MainScreen = ({ navigation }) => {
             id: 21,
             C_Num: 22,
             Qty: 0,
-            cost: 0.00,
-            retail: 0.00,
+            cost: 10.00,
+            retail: 11.00,
             isChecked: true,
             grandTotal: 0,
             grand: 0,
@@ -569,8 +569,8 @@ const MainScreen = ({ navigation }) => {
             id: 20,
             C_Num: 21,
             Qty: 0,
-            cost: 0.00,
-            retail: 0.00,
+            cost: 9.00,
+            retail: 10.00,
             isChecked: true,
             grandTotal: 0,
             grand: 0,
@@ -579,8 +579,8 @@ const MainScreen = ({ navigation }) => {
             id: 21,
             C_Num: 22,
             Qty: 0,
-            cost: 0.00,
-            retail: 0.00,
+            cost: 10.00,
+            retail: 11.00,
             isChecked: true,
             grandTotal: 0,
             grand: 0,
@@ -870,7 +870,7 @@ const MainScreen = ({ navigation }) => {
         <View style={{ flex: 1 }}>
             <View style={styles.HeaderView}>
                 <HeaderComponent
-                    CashRegister={"Holiday Cash Register"}
+                    CashRegister={mode? "Peppermintlane" : "Givingtree"}
                     shoppingCart={Images.ic_shoppingCart}
                     backgroundColor={'#fff'}
                     borderWidth={wp(0.2)}

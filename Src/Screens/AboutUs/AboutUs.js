@@ -24,6 +24,7 @@ import styles from './Styles';
 import RenderHtml from 'react-native-render-html';
 import {useDispatch, useSelector} from 'react-redux';
 import Logo from '../../Assets/logo.png';
+import Logo2 from '../../Assets/givingtree.png';
 const AboutUs = ({navigation}) => {
   const {toggleDrawer} = navigation; // <-- drawer's navigation (not from stack)
   const tokenChecked = useSelector(state => state?.listing?.tokenChecked);
@@ -71,7 +72,7 @@ const AboutUs = ({navigation}) => {
             {first ? (
               <Image source={Logo} style={styles.image} />
             ) : (
-              <Image source={Logo} style={styles.image} />
+              <Image source={Logo2} style={styles.image} />
             )}
           </View>
         </View>
