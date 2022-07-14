@@ -35,7 +35,7 @@ const ProfileScreen = ({ navigation }) => {
         if (tokenChecked == "peppermint") {
             setShopName("Peppermint Lane Holiday Shop")
         } else if (tokenChecked == "givingtree") {
-            setShopName("Giving Tree Holiday Shop")
+            setShopName("The Giving Tree Holiday Shop")
         }
     }, [])
 
@@ -68,7 +68,7 @@ const ProfileScreen = ({ navigation }) => {
                         openDrawer={toggleDrawer}
                     />
                 </View>
-                <View style={styles.firstView} />
+                {/* <View style={styles.firstView} /> */}
                 <View style={styles.schoolView}>
                     <View style={isTab ? styles.innerViewTab : styles.innerView}>
                         <Text style={styles.enterSchool}>Please enter your school...</Text>
@@ -93,7 +93,7 @@ const ProfileScreen = ({ navigation }) => {
                     />
                     <BtnComponent
                         Text={"Save"}
-                        width={wp(80)}
+                        width={wp('80%')}
                         height={hp(7)}
                         marginTop={hp(2)}
                         onPress={saveDetails}

@@ -61,13 +61,15 @@ const CodePriceChange = ({ navigation }) => {
                             <Text style={styles.costStyler}>Code {item.C_Num}:</Text>
                             <TextInput editable={false} keyboardType='decimal-pad' style={styles.textInputStyle}
                                 onChangeText={(value) => {
-                                    item.cost = parseFloat(value)
+                                    item.cost = value
+                                    // item.cost = parseFloat(value)?.toFixed(2)
                                 }}>
                                 <Text style={styles.costStyler}>{item.cost}</Text>
                             </TextInput>
                             <TextInput keyboardType='decimal-pad' style={styles.textInputStyle}
                                 onChangeText={(values) => {
-                                    item.retail = parseFloat(values)
+                                    item.retail = values
+                                    // item.retail = parseFloat(values)?.toFixed(2)
                                 }}
                             >
                                 <Text style={styles.costStyler}>{item.retail}</Text>

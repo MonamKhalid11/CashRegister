@@ -29,13 +29,12 @@ export default StyleSheet.create({
         fontSize: wp(6), fontWeight: 'bold', marginTop: wp(5)
     },
     textInput: {
-        height: hp(6), width: wp(80), fontSize: wp(6), marginVertical: wp('4')
+        height: hp(6), width: wp('80%'), fontSize: wp(5), marginVertical: wp('4')
     },
     lastView: {
-        backgroundColor: 'red', height: hp(10), width: wp(100), position: 'absolute', bottom: 0, justifyContent: 'center', alignItems: 'center'
+        backgroundColor: 'red', height: hp(10), width: wp('100%'), position: 'absolute', bottom: 0, justifyContent: 'center', alignItems: 'center'
     },
     textPeppermint: {
-        textAlign: 'center', fontSize: 20, fontWeight: 'bold'
+        textAlign: 'center', fontSize: 16, fontWeight: 'bold'
     }
-
 })
