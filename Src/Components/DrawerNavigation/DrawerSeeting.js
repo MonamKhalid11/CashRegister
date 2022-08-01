@@ -24,7 +24,7 @@ class Setting extends Component {
 
                     <View style={styles.LinksContiner}>
                         <View style={{ flexDirection: 'row', }}>
-                            <Desktop name="iconfontdesktop" size={30} color="#fff" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <Desktop name="iconfontdesktop" size={w('9')} color="#fff" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('MainScreen')}
                             >
@@ -35,17 +35,17 @@ class Setting extends Component {
                         <View style={{ backgroundColor: 'red', height: h(0.4), width: w(70), marginTop: w(3) }} />
 
                         <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                            <User name="user" size={30} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <User name="user" size={w('9')} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
 
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('ProfileScreen')}
                                 style={styles.Btn} >
-                                <Text style={styles.Btnlabel}>Our Profile</Text>
+                                <Text style={styles.Btnlabel}>Schools Profile</Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                            <User name="tag" size={30} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <User name="tag" size={w('9')} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('CodePriceChange')}
                                 style={styles.Btn} >
@@ -67,7 +67,7 @@ class Setting extends Component {
 
 
                         <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                            <Report name="bar-graph" size={30} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <Report name="bar-graph" size={w('9')} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('Reports')}
                                 style={styles.Btn} >
@@ -77,7 +77,7 @@ class Setting extends Component {
 
 
                         <View style={{ flexDirection: 'row', marginTop: widthPercentageToDP(5), }}>
-                            <Inform name="infocirlce" size={30} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
+                            <Inform name="infocirlce" size={w('9')} color="black" style={{ marginRight: widthPercentageToDP(3) }} />
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('AboutUs')}
                                 style={styles.Btn} >
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     },
     Btnlabel:
     {
-        fontSize: 16,
+        fontSize: w('4.5'),
         color: '#fff',
         fontWeight: 'bold', marginRight: w(19)
     }

@@ -5,9 +5,9 @@ export const showListing = (listingParameter) => ({
     listing: listingParameter
 })
 
-export const setCodePriceChange = (listingParameter) => ({
+export const setCodePriceChange = (listingParameters) => ({
     type: ActionTypes.CODE_PRICE_CHANGE,
-    codePriceChange: listingParameter
+    codePriceChange: listingParameters
 })
 
 export const submitValue = (submittingParams) => ({

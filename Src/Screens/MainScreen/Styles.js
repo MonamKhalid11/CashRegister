@@ -9,7 +9,8 @@ export default StyleSheet.create({
     },
     sectionStyle: {
         marginTop: wp(5),
-        height: hp(10),
+        // height: hp(10),
+        padding: wp(1),
         width: wp(20),
         borderRadius: wp(1),
         borderWidth: wp(0.4),
@@ -32,13 +33,13 @@ export default StyleSheet.create({
     CTextStyle: {
         color: 'red',
         fontWeight: 'bold',
-        fontSize: wp(4.5),
+        fontSize: wp(3.8),
         textAlign: 'center',
     },
     DTextStyle: {
         color: 'grey',
         fontWeight: 'bold',
-        fontSize: wp(4.5),
+        fontSize: wp(3.5),
         textAlign: 'center',
     },
     ViewFlatList: {

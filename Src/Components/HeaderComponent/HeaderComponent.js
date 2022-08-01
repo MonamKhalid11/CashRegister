@@ -5,7 +5,7 @@ import {
     Text,
     View, Image, Touchable, TouchableOpacity
 } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo, { isTablet } from 'react-native-device-info';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Feather';
 import images from '../../Assets/Images/Images';
@@ -17,13 +17,10 @@ const HeaderComponent = (props) => {
 
     useEffect(() => {
         setIsTab(DeviceInfo.isTablet())
-    })
+    }, [])
     return (
-        // console.log("response of the header comp=>", props),
-        <View style={{ height: hp(10), width: wp(100), }}>
-
+        <View style={{ height: hp(10), width: wp(100)}}>
             <View style={{ flexDirection: 'row', paddingHorizontal: wp(5), justifyContent: 'space-between' }}>
-
                 <TouchableOpacity
                     onPress={props.openDrawer}
                     style={{ height: hp(5), width: wp(10), backgroundColor: '#fff', borderWidth: wp(0.2), borderRadius: wp(1), alignItems: 'center', marginLeft: wp(1) }}>

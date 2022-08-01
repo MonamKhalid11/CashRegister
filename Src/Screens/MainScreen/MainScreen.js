@@ -30,6 +30,7 @@ const MainScreen = ({ navigation }) => {
     const [token, setToken] = useState();
     let tokenChecked = useSelector(state => state.listing.tokenChecked)
     const productsList = useSelector(state => state.listing.productsList)
+    console.log("products listsss here ", productsList)
     const initialArray = useSelector(state => state.listing.productsList)
     let itemCounter = useSelector(state => state.listing.itemCounter)
     const [tempArray, setTempArray] = useState(null);
@@ -703,6 +704,10 @@ const MainScreen = ({ navigation }) => {
 
             }
             setAccessModalVisible(true)
+        } else {
+            if(tokenChecked == 'peppermint'){
+                setMode(true)
+            }
         }
     }, [])
     useFocusEffect(() => {
@@ -881,11 +886,10 @@ const MainScreen = ({ navigation }) => {
 
             <View style={styles.ViewFlatList}>
 
-
                 <FlatList
                     data={productsList}
                     numColumns={4}
-                    extraData={productsList}
+                    // extraData={productsList}
                     keyExtractor={item => item.id}
                     renderItem={({ item, index }) =>
                         <View style={{ justifyContent: 'space-between', paddingHorizontal: wp(2.4) }}>

@@ -8,13 +8,13 @@ export default StyleSheet.create({
         height: hp(23), width: wp(100), borderBottomWidth: wp(2.5), borderBottomColor: 'grey'
     },
     schoolView: {
-        height: hp(8), width: wp(100), backgroundColor: '#DDD'
+        padding: hp(2), width: wp(100), backgroundColor: '#DDD'
     },
     innerView: {
-        alignSelf: 'center', justifyContent: 'center', width: wp(25), marginTop: wp(2)
+        alignSelf: 'center', justifyContent: 'center'
     },
     innerViewTab: {
-        alignSelf: 'center', justifyContent: 'center', width: wp(50), marginTop: wp(2)
+        alignSelf: 'center', justifyContent: 'center'
     },
     enterSchool: {
         fontSize: wp(4), fontWeight: 'bold'
@@ -29,12 +29,12 @@ export default StyleSheet.create({
         fontSize: wp(6), fontWeight: 'bold', marginTop: wp(5)
     },
     textInput: {
-        height: hp(6), width: wp('80%'), fontSize: wp(5), marginVertical: wp('4')
+        height: hp(6), width: wp('80%'), fontSize: wp(5), marginVertical: wp('4'), marginBottom: wp('10'),
     },
     lastView: {
         backgroundColor: 'red', height: hp(10), width: wp('100%'), position: 'absolute', bottom: 0, justifyContent: 'center', alignItems: 'center'
     },
     textPeppermint: {
-        textAlign: 'center', fontSize: 16, fontWeight: 'bold'
+        textAlign: 'center', fontSize: wp('4'), fontWeight: 'bold'
     }
 })

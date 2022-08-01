@@ -632,6 +632,7 @@ const listingReducer = (state = {
     codePriceList: []
 
 }, action) => {
+    console.log("State isss", state)
     switch (action.type) {
         case Actions.SHOW_LISTING:
             return Object.assign({}, state, {

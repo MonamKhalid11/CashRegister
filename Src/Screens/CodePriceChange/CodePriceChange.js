@@ -19,6 +19,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const CodePriceChange = ({ navigation }) => {
     const codePriceList = useSelector(state => state.listing.codePriceList)
+    console.log("code price change list", codePriceList)
     const { toggleDrawer } = navigation // <-- drawer's navigation (not from stack)
     const dispatch = useDispatch()
     let temp = new Array();
@@ -54,21 +55,21 @@ const CodePriceChange = ({ navigation }) => {
             <View style={{ flex: 1 }}>
                 <FlatList
                     data={codePriceList}
-                    extraData={codePriceList}
+                    // extraData={codePriceList}
                     keyExtractor={item => item.id}
                     renderItem={({ item, index }) =>
                         <View style={styles.flatlistView}>
                             <Text style={styles.costStyler}>Code {item.C_Num}:</Text>
                             <TextInput editable={false} keyboardType='decimal-pad' style={styles.textInputStyle}
                                 onChangeText={(value) => {
-                                    item.cost = value
+                                    item.cost = parseFloat(value)
                                     // item.cost = parseFloat(value)?.toFixed(2)
                                 }}>
                                 <Text style={styles.costStyler}>{item.cost}</Text>
                             </TextInput>
                             <TextInput keyboardType='decimal-pad' style={styles.textInputStyle}
                                 onChangeText={(values) => {
-                                    item.retail = values
+                                    item.retail = parseFloat(values)
                                     // item.retail = parseFloat(values)?.toFixed(2)
                                 }}
                             >

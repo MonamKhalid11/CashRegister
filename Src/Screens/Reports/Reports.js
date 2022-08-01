@@ -79,6 +79,7 @@ const Report = ({ navigation, props }) => {
         let iPad = DeviceInfo.isTablet()
         console.log("Version is ", version, " and device is iPad", iPad)
         if (isTablet()) {
+            setIsTab(true)
             console.log("Your are using iPad")
         } else {
             console.log("Your are using iPhone")
@@ -157,8 +158,8 @@ const Report = ({ navigation, props }) => {
         Mailer.mail({
             subject: 'Holiday Cash Register Report',
             recipients: [email ? email : ''],
-            ccRecipients: ['joe@bluetonemedia.com'],
-            bccRecipients: [userEmail ? userEmail : ''],
+            // ccRecipients: ['joe@bluetonemedia.com'],
+            // bccRecipients: [userEmail ? userEmail : ''],
             body: '<b>Find Holiday Cash Register Report in attachment</b>',
             isHTML: true,
             attachments: [{

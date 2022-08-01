@@ -43,7 +43,7 @@ const ProfileScreen = ({ navigation }) => {
     const saveDetails = () => {
         let user = {
             name: name,
-            email: email
+            // email: email
         }
         dispatch(saveUser(user))
         alert("Saved!")
@@ -51,7 +51,7 @@ const ProfileScreen = ({ navigation }) => {
 
     useEffect(() => {
         setName(user && user.name)
-        setEmail(user && user.email)
+        // setEmail(user && user.email)
     }, [])
 
     useFocusEffect(() => {
@@ -64,7 +64,7 @@ const ProfileScreen = ({ navigation }) => {
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 0.08, marginTop: wp(7), }}>
                     <HeaderComponent
-                        CashRegister={"Our Profile"}
+                        CashRegister={"Schools Profile"}
                         openDrawer={toggleDrawer}
                     />
                 </View>
@@ -82,7 +82,7 @@ const ProfileScreen = ({ navigation }) => {
                         onChangeText={(text) => setName(text)}
                         placeholderTextColor="#000000"
                     />
-                    <TextInput
+                    {/* <TextInput
                         style={styles.textInput}
                         value={email}
                         autoCapitalize="none"
@@ -90,7 +90,7 @@ const ProfileScreen = ({ navigation }) => {
                         onChangeText={(text) => setEmail(text)}
                         placeholder="Email Address (Optional)"
                         placeholderTextColor="#000000"
-                    />
+                    /> */}
                     <BtnComponent
                         Text={"Save"}
                         width={wp('80%')}
