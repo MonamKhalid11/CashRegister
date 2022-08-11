@@ -8,13 +8,13 @@ export default StyleSheet.create({
         height: hp(23), width: wp(100), borderBottomWidth: wp(2.5), borderBottomColor: 'grey'
     },
     schoolView: {
-        padding: hp(2), width: wp(100), backgroundColor: '#DDD'
+        padding: hp(2), width: wp('100%'), backgroundColor: '#DDD'
     },
     innerView: {
-        alignSelf: 'center', justifyContent: 'center'
+        alignItems: 'center', justifyContent: 'center'
     },
     innerViewTab: {
-        alignSelf: 'center', justifyContent: 'center'
+        alignItems: 'center', justifyContent: 'center'
     },
     enterSchool: {
         fontSize: wp(4), fontWeight: 'bold'
