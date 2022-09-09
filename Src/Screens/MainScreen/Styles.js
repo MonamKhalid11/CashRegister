@@ -9,7 +9,7 @@ export default StyleSheet.create({
     },
     sectionStyle: {
         marginTop: wp(5),
-        // height: hp(10),
+        height: hp(13),
         padding: wp(1),
         width: wp(20),
         borderRadius: wp(1),

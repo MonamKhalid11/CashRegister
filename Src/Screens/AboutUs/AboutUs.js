@@ -44,7 +44,7 @@ const AboutUs = ({navigation}) => {
     //   setFirst(false);
     // }
     const tab = DeviceInfo.isTablet()
-    console.log('TAB', tab)
+    console.log('TAB', tab, tokenChecked, first)
     setIsTab(tab)
   }, []);
 
@@ -100,11 +100,11 @@ const AboutUs = ({navigation}) => {
               source={first ? source : source2}
             />
             }
-            {first ? (
+            {first ? 
               <Image source={Logo} style={styles.image} />
-            ) : (
+            : 
               <Image source={Logo2} style={styles.image} />
-            )}
+            }
           </View>
         </View>
       </View>
